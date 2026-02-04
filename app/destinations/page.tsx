@@ -3,72 +3,177 @@
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { motion } from "framer-motion";
-import { Search, MapPin, Filter } from "lucide-react";
-
-const destinations = [
-    { id: 1, title: "Ella", region: "Sri Lanka", type: "Mountain", image: "https://images.unsplash.com/photo-1546708973-b339540b5162?q=80&w=800" },
-    { id: 2, title: "Bali", region: "Indonesia", type: "Tropical", image: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?q=80&w=800" },
-    { id: 3, title: "Maldives", region: "Indian Ocean", type: "Beach", image: "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?q=80&w=800" },
-    { id: 4, title: "Kyoto", region: "Japan", type: "Culture", image: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?q=80&w=800" },
-    { id: 5, title: "Santorini", region: "Greece", type: "Coastal", image: "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?q=80&w=800" },
-    { id: 6, title: "Swiss Alps", region: "Switzerland", type: "Snow", image: "https://images.unsplash.com/photo-1502920917128-1aa500764cbd?q=80&w=800" },
-];
+import { Search, MapPin, Filter, Calendar, Compass, ArrowRight, Clock, Star } from "lucide-react";
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { supabase, Destination } from "@/lib/supabase";
 
 export default function Destinations() {
+    const [destinations, setDestinations] = useState<Destination[]>([]);
+    const [searchQuery, setSearchQuery] = useState("");
+    const [selectedType, setSelectedType] = useState<string>("All");
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        fetchDestinations();
+    }, []);
+
+    const fetchDestinations = async () => {
+        try {
+            const { data, error } = await supabase
+                .from('destinations')
+                .select('*')
+                .order('name', { ascending: true });
+
+            if (error) throw error;
+            setDestinations(data || []);
+        } catch (error) {
+            console.error('Error fetching destinations:', error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const types = ["All", ...Array.from(new Set(destinations.map(d => d.type)))];
+
+    const filteredDestinations = destinations.filter(dest => {
+        const matchesSearch = dest.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            dest.region.toLowerCase().includes(searchQuery.toLowerCase());
+        const matchesType = selectedType === "All" || dest.type === selectedType;
+        return matchesSearch && matchesType;
+    });
+
     return (
-        <div className="bg-slate-950 min-h-screen">
+        <div className="bg-white min-h-screen">
             <Navbar />
-            <main className="pt-32 pb-24 px-6">
-                <div className="max-w-7xl mx-auto">
-                    {/* Header */}
-                    <div className="mb-16">
-                        <h1 className="text-5xl font-extrabold text-white mb-6">Discovery our Destinations</h1>
-                        <p className="text-xl text-slate-400 max-w-2xl">
-                            From the highest peaks to the clearest waters, explore our curated list of the world's most beautiful locations.
+
+            {/* Hero Section */}
+            <section className="relative pt-32 pb-20 px-6 overflow-hidden">
+                <div className="absolute inset-0 opacity-5">
+                    <div className="absolute top-20 left-10 w-96 h-96 bg-green-500 rounded-full blur-[120px]" />
+                    <div className="absolute bottom-20 right-10 w-96 h-96 bg-green-400 rounded-full blur-[120px]" />
+                </div>
+
+                <div className="max-w-7xl mx-auto relative z-10">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="text-center mb-12"
+                    >
+                        <span className="text-green-600 font-bold tracking-widest uppercase text-sm mb-4 block">
+                            Explore Sri Lanka
+                        </span>
+                        <h1 className="text-5xl md:text-7xl font-extrabold text-gray-900 mb-6">
+                            Discover Amazing Destinations
+                        </h1>
+                        <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                            From ancient fortresses to pristine beaches, explore the pearl of the Indian Ocean's most breathtaking locations
                         </p>
-                    </div>
+                    </motion.div>
 
-                    {/* Search and Filter Bar */}
-                    <div className="flex flex-col md:flex-row gap-4 mb-12">
-                        <div className="flex-1 relative">
-                            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={20} />
-                            <input
-                                type="text"
-                                placeholder="Search by city or country..."
-                                className="w-full pl-12 pr-4 py-4 bg-slate-900 rounded-2xl border-none outline-none focus:ring-2 ring-blue-500 transition-all text-white placeholder:text-slate-500"
-                            />
+                    {/* Search and Filter */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.2 }}
+                        className="max-w-4xl mx-auto"
+                    >
+                        <div className="flex flex-col md:flex-row gap-4 mb-8">
+                            <div className="flex-1 relative">
+                                <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
+                                <input
+                                    type="text"
+                                    placeholder="Search destinations..."
+                                    value={searchQuery}
+                                    onChange={(e) => setSearchQuery(e.target.value)}
+                                    className="w-full pl-12 pr-4 py-4 bg-white backdrop-blur-xl rounded-2xl border border-gray-200 outline-none focus:ring-2 ring-green-500 transition-all text-gray-900 placeholder:text-gray-400 shadow-sm"
+                                />
+                            </div>
                         </div>
-                        <button className="flex items-center justify-center gap-2 px-8 py-4 bg-slate-900 rounded-2xl font-bold hover:bg-slate-800 transition-colors text-white">
-                            <Filter size={20} />
-                            Filters
-                        </button>
-                    </div>
 
-                    {/* Grid */}
+                        {/* Type Filter Pills */}
+                        <div className="flex flex-wrap gap-3 justify-center">
+                            {types.map(type => (
+                                <button
+                                    key={type}
+                                    onClick={() => setSelectedType(type)}
+                                    className={`px-6 py-2.5 rounded-full font-bold text-sm transition-all ${selectedType === type
+                                        ? "bg-green-500 text-white shadow-lg shadow-green-600/30"
+                                        : "bg-gray-100 text-gray-600 hover:bg-gray-200 border border-gray-200"
+                                        }`}
+                                >
+                                    {type}
+                                </button>
+                            ))}
+                        </div>
+                    </motion.div>
+                </div>
+            </section>
+
+            {/* Destinations Grid */}
+            <section className="pb-24 px-6">
+                <div className="max-w-7xl mx-auto">
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {destinations.map((dest, index) => (
+                        {filteredDestinations.map((dest, index) => (
                             <motion.div
                                 key={dest.id}
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: index * 0.05 }}
-                                className="group relative h-80 overflow-hidden rounded-[2rem] shadow-lg"
+                                className="group"
                             >
-                                <img src={dest.image} alt={dest.title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-                                <div className="absolute bottom-6 left-6 right-6">
-                                    <div className="flex items-center gap-2 text-blue-400 text-xs font-bold uppercase tracking-widest mb-2">
-                                        <MapPin size={14} />
-                                        {dest.region}
+                                <Link href={`/destinations/${dest.id}`}>
+                                    <div className="relative h-[400px] overflow-hidden rounded-[2rem] bg-white border border-gray-200 hover:border-green-300 transition-all duration-500 cursor-pointer shadow-sm">
+                                        {/* Image */}
+                                        <div className="absolute inset-0">
+                                            <img
+                                                src={dest.main_image}
+                                                alt={dest.name}
+                                                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                            />
+                                            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+                                        </div>
+
+                                        {/* Type Badge */}
+                                        <div className="absolute top-6 left-6">
+                                            <span className="px-4 py-1.5 bg-white/20 backdrop-blur-md rounded-full text-white text-xs font-bold border border-white/30 uppercase tracking-widest">
+                                                {dest.type}
+                                            </span>
+                                        </div>
+
+                                        {/* Content */}
+                                        <div className="absolute bottom-0 left-0 right-0 p-6">
+                                            <div className="flex items-center gap-2 text-green-600 text-xs font-bold uppercase tracking-widest mb-2">
+                                                <MapPin size={14} />
+                                                {dest.region}
+                                            </div>
+                                            <h3 className="text-3xl font-bold text-white mb-2">{dest.name}</h3>
+                                            <p className="text-slate-300 text-sm line-clamp-2 mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                                                {dest.speciality}
+                                            </p>
+
+                                            {/* View Details Button */}
+                                            <div className="flex items-center gap-2 text-white font-bold opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
+                                                <span>View Details</span>
+                                                <ArrowRight size={20} className="group-hover:translate-x-2 transition-transform" />
+                                            </div>
+                                        </div>
                                     </div>
-                                    <h3 className="text-2xl font-bold text-white mb-1">{dest.title}</h3>
-                                    <span className="text-slate-300 text-sm font-medium">{dest.type} Escape</span>
-                                </div>
+                                </Link>
                             </motion.div>
                         ))}
                     </div>
+
+                    {filteredDestinations.length === 0 && (
+                        <div className="text-center py-20">
+                            <Compass size={64} className="text-slate-700 mx-auto mb-4" />
+                            <h3 className="text-2xl font-bold text-slate-400 mb-2">No destinations found</h3>
+                            <p className="text-slate-500">Try adjusting your search or filters</p>
+                        </div>
+                    )}
                 </div>
-            </main>
+            </section>
+
             <Footer />
         </div>
     );

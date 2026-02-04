@@ -18,6 +18,7 @@ export const metadata: Metadata = {
 };
 
 import { ThemeProvider } from "./components/ThemeProvider";
+import LiveChat from "./components/LiveChat";
 
 export default function RootLayout({
   children,
@@ -31,12 +32,13 @@ export default function RootLayout({
       >
         <ThemeProvider
           attribute="class"
-          defaultTheme="dark"
-          forcedTheme="dark"
+          defaultTheme="light"
+          forcedTheme="light"
           enableSystem={false}
           disableTransitionOnChange
         >
           {children}
+          <LiveChat />
         </ThemeProvider>
       </body>
     </html>

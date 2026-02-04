@@ -3,110 +3,230 @@
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { motion } from "framer-motion";
-import { Star, Clock, Users, ArrowRight } from "lucide-react";
-
-const packages = [
-    {
-        id: 1,
-        title: "Classic Sri Lanka Heritage",
-        duration: "10 Days",
-        group: "Max 12 People",
-        rating: 4.9,
-        reviewsCount: 128,
-        price: "$1,299",
-        image: "https://images.unsplash.com/photo-1588598116712-427909247f52?q=80&w=800",
-        features: ["Boutique Hotels", "Private Driver", "Sigiriya Visit"]
-    },
-    {
-        id: 2,
-        title: "Bali Surf & Yoga Retreat",
-        duration: "7 Days",
-        group: "Max 8 People",
-        rating: 4.8,
-        reviewsCount: 95,
-        price: "$899",
-        image: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?q=80&w=800",
-        features: ["Eco Villas", "Surf Lessons", "Daily Yoga"]
-    },
-    {
-        id: 3,
-        title: "Maldives Overwater Luxury",
-        duration: "5 Days",
-        group: "Solo/Couples",
-        rating: 5.0,
-        reviewsCount: 42,
-        price: "$2,499",
-        image: "https://images.unsplash.com/photo-1544526226-d4568090ffb8?q=80&w=800",
-        features: ["Half Board", "Spa Access", "Speedboat Transfer"]
-    }
-];
+import { Star, Clock, Users, ArrowRight, MapPin, Check } from "lucide-react";
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { supabase, Package } from "@/lib/supabase";
 
 export default function Packages() {
-    return (
-        <div className="bg-slate-950 min-h-screen">
-            <Navbar />
-            <main className="pt-32 pb-24 px-6">
-                <div className="max-w-7xl mx-auto">
-                    <div className="text-center mb-16">
-                        <h1 className="text-5xl font-extrabold text-white mb-6">Unforgettable Tour Packages</h1>
-                        <p className="text-xl text-slate-400 max-w-2xl mx-auto">
-                            Our expert travel planners have designed these special itineraries to give you the most authentic experiences.
-                        </p>
-                    </div>
+    const [packages, setPackages] = useState<Package[]>([]);
+    const [selectedCategory, setSelectedCategory] = useState<string>("All");
+    const [loading, setLoading] = useState(true);
 
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                        {packages.map((pkg, index) => (
+    useEffect(() => {
+        fetchPackages();
+    }, []);
+
+    const fetchPackages = async () => {
+        try {
+            const { data, error } = await supabase
+                .from('packages')
+                .select('*')
+                .order('price', { ascending: true });
+
+            if (error) throw error;
+            setPackages(data || []);
+        } catch (error) {
+            console.error('Error fetching packages:', error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const categories = ["All", "Cultural", "Safari", "Beach", "Hill Country", "Adventure", "Custom"];
+
+    const filteredPackages = selectedCategory === "All"
+        ? packages
+        : packages.filter(pkg => pkg.category === selectedCategory);
+
+    return (
+        <div className="bg-white min-h-screen">
+            <Navbar />
+
+            {/* Hero Section */}
+            <section className="relative pt-32 pb-20 px-6 overflow-hidden">
+                <div className="absolute inset-0 opacity-5">
+                    <div className="absolute top-20 left-10 w-96 h-96 bg-green-500 rounded-full blur-[120px]" />
+                    <div className="absolute bottom-20 right-10 w-96 h-96 bg-green-400 rounded-full blur-[120px]" />
+                </div>
+
+                <div className="max-w-7xl mx-auto relative z-10">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="text-center mb-12"
+                    >
+                        <span className="text-green-600 font-bold tracking-widest uppercase text-sm mb-4 block">
+                            Tour Packages
+                        </span>
+                        <h1 className="text-5xl md:text-7xl font-extrabold text-gray-900 mb-6">
+                            Unforgettable Journeys
+                        </h1>
+                        <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                            Expertly crafted itineraries combining culture, adventure, wildlife, and relaxation
+                        </p>
+                    </motion.div>
+
+                    {/* Category Filter */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.2 }}
+                        className="flex flex-wrap gap-3 justify-center"
+                    >
+                        {categories.map(category => (
+                            <button
+                                key={category}
+                                onClick={() => setSelectedCategory(category)}
+                                className={`px-6 py-3 rounded-full font-bold text-sm transition-all ${selectedCategory === category
+                                    ? "bg-green-500 text-white shadow-lg shadow-green-600/30"
+                                    : "bg-gray-100 text-gray-600 hover:bg-gray-200 border border-gray-200"
+                                    }`}
+                            >
+                                {category}
+                            </button>
+                        ))}
+                    </motion.div>
+                </div>
+            </section>
+
+            {/* Packages Grid */}
+            <section className="pb-24 px-6">
+                <div className="max-w-7xl mx-auto">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        {filteredPackages.map((pkg, index) => (
                             <motion.div
                                 key={pkg.id}
-                                initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                className="bg-slate-900 rounded-[2.5rem] overflow-hidden shadow-2xl flex flex-col md:flex-row border border-white/5"
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: index * 0.1 }}
+                                className="group bg-slate-900/50 backdrop-blur-xl border border-white/10 rounded-[2.5rem] overflow-hidden hover:border-white/20 transition-all duration-500"
                             >
-                                <div className="md:w-2/5 relative min-h-[300px]">
-                                    <img src={pkg.image} alt={pkg.title} className="absolute inset-0 w-full h-full object-cover" />
-                                </div>
-                                <div className="md:w-3/5 p-8 flex flex-col">
-                                    <div className="flex items-center justify-between mb-4">
-                                        <div className="flex items-center gap-1 text-yellow-500">
-                                            <Star size={16} fill="currentColor" />
-                                            <span className="text-sm font-bold">{pkg.rating}</span>
-                                            <span className="text-slate-400 text-xs font-normal">({pkg.reviewsCount} reviews)</span>
-                                        </div>
-                                        <span className="text-2xl font-black text-blue-600 dark:text-blue-400">{pkg.price}</span>
+                                {/* Image */}
+                                <div className="relative h-64 overflow-hidden">
+                                    <img
+                                        src={pkg.image}
+                                        alt={pkg.name}
+                                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent" />
+
+                                    {/* Category Badge */}
+                                    <div className="absolute top-6 left-6">
+                                        <span className="px-4 py-1.5 bg-white/20 backdrop-blur-md rounded-full text-white text-xs font-bold border border-white/30 uppercase tracking-widest">
+                                            {pkg.category} Tour
+                                        </span>
                                     </div>
 
-                                    <h3 className="text-2xl font-bold text-white mb-4 line-clamp-1">{pkg.title}</h3>
-
-                                    <div className="flex gap-4 mb-6">
-                                        <div className="flex items-center gap-1.5 text-slate-500 text-sm">
-                                            <Clock size={16} className="text-blue-500" />
-                                            {pkg.duration}
-                                        </div>
-                                        <div className="flex items-center gap-1.5 text-slate-500 text-sm">
-                                            <Users size={16} className="text-blue-500" />
-                                            {pkg.group}
-                                        </div>
-                                    </div>
-
-                                    <div className="space-y-2 mb-8 flex-1">
-                                        {pkg.features.map(f => (
-                                            <div key={f} className="flex items-center gap-2 text-slate-400 text-sm">
-                                                <div className="w-1.5 h-1.5 bg-blue-500 rounded-full" />
-                                                {f}
+                                    {/* Price Tag */}
+                                    {pkg.price > 0 && (
+                                        <div className="absolute top-6 right-6">
+                                            <div className="bg-green-500 text-white px-6 py-3 rounded-2xl font-black text-2xl shadow-xl">
+                                                ${pkg.price}
                                             </div>
-                                        ))}
+                                        </div>
+                                    )}
+                                </div>
+
+                                {/* Content */}
+                                <div className="p-8">
+                                    <h3 className="text-3xl font-bold text-gray-900 mb-3 group-hover:text-green-600 transition-colors">
+                                        {pkg.name}
+                                    </h3>
+
+                                    <p className="text-gray-600 mb-6 leading-relaxed">
+                                        {pkg.description}
+                                    </p>
+
+                                    {/* Meta Info */}
+                                    <div className="flex flex-wrap gap-4 mb-6">
+                                        {pkg.days > 0 && (
+                                            <div className="flex items-center gap-2 text-gray-700">
+                                                <Clock size={18} className="text-green-600" />
+                                                <span className="font-semibold">{pkg.days} Days</span>
+                                            </div>
+                                        )}
+                                        <div className="flex items-center gap-2 text-gray-700">
+                                            <MapPin size={18} className="text-green-600" />
+                                            <span className="font-semibold">Sri Lanka</span>
+                                        </div>
                                     </div>
 
-                                    <button className="w-full py-4 bg-slate-900 dark:bg-white dark:text-slate-900 text-white rounded-2xl font-bold flex items-center justify-center gap-2 hover:bg-slate-800 transition-colors">
-                                        Explore Details
-                                        <ArrowRight size={20} />
-                                    </button>
+                                    {/* Included Items */}
+                                    <div className="bg-gray-50 rounded-2xl p-6 mb-6 border border-gray-200">
+                                        <h4 className="text-gray-900 font-bold mb-4 flex items-center gap-2">
+                                            <Check size={20} className="text-green-600" />
+                                            What's Included
+                                        </h4>
+                                        <div className="grid grid-cols-1 gap-3">
+                                            {pkg.hotel_included && (
+                                                <div className="flex items-start gap-2 text-sm text-gray-700">
+                                                    <div className="w-1.5 h-1.5 bg-green-600 rounded-full mt-2 flex-shrink-0" />
+                                                    <span><strong>Hotel:</strong> {pkg.hotel_details}</span>
+                                                </div>
+                                            )}
+                                            {pkg.transport_included && (
+                                                <div className="flex items-start gap-2 text-sm text-gray-700">
+                                                    <div className="w-1.5 h-1.5 bg-green-600 rounded-full mt-2 flex-shrink-0" />
+                                                    <span><strong>Transport:</strong> {pkg.transport_details}</span>
+                                                </div>
+                                            )}
+                                            {pkg.guide_included && (
+                                                <div className="flex items-start gap-2 text-sm text-gray-700">
+                                                    <div className="w-1.5 h-1.5 bg-green-600 rounded-full mt-2 flex-shrink-0" />
+                                                    <span><strong>Guide:</strong> {pkg.guide_details}</span>
+                                                </div>
+                                            )}
+                                            {pkg.meals && (
+                                                <div className="flex items-start gap-2 text-sm text-gray-700">
+                                                    <div className="w-1.5 h-1.5 bg-green-600 rounded-full mt-2 flex-shrink-0" />
+                                                    <span><strong>Meals:</strong> {pkg.meals}</span>
+                                                </div>
+                                            )}
+                                        </div>
+                                    </div>
+
+                                    {/* Highlights */}
+                                    <div className="mb-6">
+                                        <h4 className="text-gray-900 font-bold mb-3">Highlights</h4>
+                                        <div className="flex flex-wrap gap-2">
+                                            {pkg.highlights.slice(0, 4).map((highlight, idx) => (
+                                                <span
+                                                    key={idx}
+                                                    className="px-3 py-1.5 bg-blue-500/10 text-blue-400 rounded-full text-xs font-semibold border border-blue-500/20"
+                                                >
+                                                    {highlight}
+                                                </span>
+                                            ))}
+                                            {pkg.highlights.length > 4 && (
+                                                <span className="px-3 py-1.5 bg-gray-200 text-gray-700 rounded-full text-xs font-semibold">
+                                                    +{pkg.highlights.length - 4} more
+                                                </span>
+                                            )}
+                                        </div>
+                                    </div>
+
+                                    {/* CTA Button */}
+                                    <Link href={`/packages/${pkg.id}`}>
+                                        <button className="w-full py-4 bg-green-500 hover:bg-green-600 text-white rounded-2xl font-bold text-lg flex items-center justify-center gap-2 transition-all shadow-lg shadow-green-600/20 group-hover:shadow-green-600/40">
+                                            {pkg.category === "Custom" ? "Get Custom Quote" : "View Full Itinerary"}
+                                            <ArrowRight size={20} className="group-hover:translate-x-2 transition-transform" />
+                                        </button>
+                                    </Link>
                                 </div>
                             </motion.div>
                         ))}
                     </div>
+
+                    {filteredPackages.length === 0 && (
+                        <div className="text-center py-20">
+                            <h3 className="text-2xl font-bold text-slate-400 mb-2">No packages found</h3>
+                            <p className="text-slate-500">Try selecting a different category</p>
+                        </div>
+                    )}
                 </div>
-            </main>
+            </section>
+
             <Footer />
         </div>
     );

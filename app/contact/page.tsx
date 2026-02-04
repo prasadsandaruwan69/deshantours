@@ -5,7 +5,46 @@ import Footer from "../components/Footer";
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, Send } from "lucide-react";
 
+import { useState } from "react";
+import { supabase } from "@/lib/supabase";
+
 export default function Contact() {
+    const [formData, setFormData] = useState({
+        name: "",
+        email: "",
+        subject: "",
+        message: ""
+    });
+    const [loading, setLoading] = useState(false);
+    const [status, setStatus] = useState<{ type: 'success' | 'error', message: string } | null>(null);
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setLoading(true);
+        setStatus(null);
+
+        try {
+            const { error } = await supabase
+                .from('contact_messages')
+                .insert([
+                    {
+                        ...formData,
+                        status: 'new'
+                    }
+                ]);
+
+            if (error) throw error;
+
+            setStatus({ type: 'success', message: 'Your message has been sent successfully!' });
+            setFormData({ name: "", email: "", subject: "", message: "" });
+        } catch (error) {
+            console.error('Error sending message:', error);
+            setStatus({ type: 'error', message: 'There was an error sending your message. Please try again.' });
+        } finally {
+            setLoading(false);
+        }
+    };
+
     return (
         <div className="bg-slate-950 min-h-screen">
             <Navbar />
@@ -55,11 +94,21 @@ export default function Contact() {
                                 animate={{ opacity: 1, scale: 1 }}
                                 className="bg-slate-900 p-8 md:p-12 rounded-[3rem] shadow-2xl border border-white/5"
                             >
-                                <form className="grid grid-cols-1 md:grid-cols-2 gap-6" onSubmit={(e) => e.preventDefault()}>
+                                {status && (
+                                    <div className={`mb-8 p-6 rounded-2xl text-center font-bold ${status.type === 'success' ? 'bg-emerald-500/10 text-emerald-500 border border-emerald-500/20' : 'bg-red-500/10 text-red-500 border border-red-500/20'
+                                        }`}>
+                                        {status.message}
+                                    </div>
+                                )}
+
+                                <form className="grid grid-cols-1 md:grid-cols-2 gap-6" onSubmit={handleSubmit}>
                                     <div className="space-y-2">
                                         <label className="text-sm font-bold text-slate-300 ml-1">Full Name</label>
                                         <input
                                             type="text"
+                                            required
+                                            value={formData.name}
+                                            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                                             placeholder="John Doe"
                                             className="w-full px-6 py-4 bg-slate-800 rounded-2xl border-none outline-none focus:ring-2 ring-blue-500 transition-all shadow-inner text-white placeholder:text-slate-500"
                                         />
@@ -68,6 +117,9 @@ export default function Contact() {
                                         <label className="text-sm font-bold text-slate-300 ml-1">Email Address</label>
                                         <input
                                             type="email"
+                                            required
+                                            value={formData.email}
+                                            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                                             placeholder="john@example.com"
                                             className="w-full px-6 py-4 bg-slate-800 rounded-2xl border-none outline-none focus:ring-2 ring-blue-500 transition-all shadow-inner text-white placeholder:text-slate-500"
                                         />
@@ -76,6 +128,9 @@ export default function Contact() {
                                         <label className="text-sm font-bold text-slate-300 ml-1">Subject</label>
                                         <input
                                             type="text"
+                                            required
+                                            value={formData.subject}
+                                            onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                                             placeholder="I want to book a trip to Bali"
                                             className="w-full px-6 py-4 bg-slate-800 rounded-2xl border-none outline-none focus:ring-2 ring-blue-500 transition-all shadow-inner text-white placeholder:text-slate-500"
                                         />
@@ -84,14 +139,19 @@ export default function Contact() {
                                         <label className="text-sm font-bold text-slate-300 ml-1">Your Message</label>
                                         <textarea
                                             rows={6}
+                                            required
+                                            value={formData.message}
+                                            onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                                             placeholder="How can we help you?"
                                             className="w-full px-6 py-4 bg-slate-800 rounded-2xl border-none outline-none focus:ring-2 ring-blue-500 transition-all shadow-inner resize-none text-white placeholder:text-slate-500"
                                         />
                                     </div>
                                     <div className="md:col-span-2">
-                                        <button className="w-full py-5 bg-blue-600 text-white rounded-2xl font-bold flex items-center justify-center gap-3 hover:bg-blue-700 transition-all hover:shadow-xl shadow-blue-500/20 group">
-                                            <Send size={20} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                                            Send Message
+                                        <button
+                                            disabled={loading}
+                                            className={`w-full py-5 bg-blue-600 text-white rounded-2xl font-bold flex items-center justify-center gap-3 hover:bg-blue-700 transition-all hover:shadow-xl shadow-blue-500/20 group ${loading ? 'opacity-70 cursor-not-allowed' : ''}`}>
+                                            <Send size={20} className={`${loading ? '' : 'group-hover:translate-x-1 group-hover:-translate-y-1'} transition-transform`} />
+                                            {loading ? 'Sending...' : 'Send Message'}
                                         </button>
                                     </div>
                                 </form>

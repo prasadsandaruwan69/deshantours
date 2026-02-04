@@ -7,29 +7,29 @@ import { Heart, Globe, Shield, Award } from "lucide-react";
 
 export default function About() {
     return (
-        <div className="bg-slate-950 min-h-screen">
+        <div className="bg-white min-h-screen">
             <Navbar />
             <main className="pt-32 pb-24 px-6">
                 <div className="max-w-7xl mx-auto">
                     {/* Story Section */}
                     <div className="flex flex-col lg:flex-row items-center gap-16 mb-32">
                         <div className="lg:w-1/2">
-                            <span className="text-blue-600 font-bold uppercase tracking-widest text-sm mb-4 block">Our Story</span>
-                            <h1 className="text-5xl font-extrabold text-white mb-8">Crafting Memories Since 2010</h1>
-                            <p className="text-lg text-slate-400 mb-6 leading-relaxed">
+                            <span className="text-green-600 font-bold uppercase tracking-widest text-sm mb-4 block">Our Story</span>
+                            <h1 className="text-5xl font-extrabold text-gray-900 mb-8">Crafting Memories Since 2010</h1>
+                            <p className="text-lg text-gray-600 mb-6 leading-relaxed">
                                 Deshan Tours started with a simple belief: travel should be more than just visiting places; it should be about connecting with cultures and creating lifelong memories.
                             </p>
-                            <p className="text-lg text-slate-400 mb-8 leading-relaxed">
+                            <p className="text-lg text-gray-600 mb-8 leading-relaxed">
                                 What began as a small family-run agency in Sri Lanka has grown into a global travel brand, trusted by thousands of travelers from every corner of the world.
                             </p>
                             <div className="grid grid-cols-2 gap-8">
                                 <div>
-                                    <h4 className="text-4xl font-black text-blue-600 mb-2">15k+</h4>
-                                    <p className="text-slate-400 font-medium">Happy Travelers</p>
+                                    <h4 className="text-4xl font-black text-green-600 mb-2">15k+</h4>
+                                    <p className="text-gray-600 font-medium">Happy Travelers</p>
                                 </div>
                                 <div>
-                                    <h4 className="text-4xl font-black text-blue-600 mb-2">50+</h4>
-                                    <p className="text-slate-500 font-medium">Destinations</p>
+                                    <h4 className="text-4xl font-black text-green-600 mb-2">50+</h4>
+                                    <p className="text-gray-600 font-medium">Destinations</p>
                                 </div>
                             </div>
                         </div>
@@ -56,13 +56,13 @@ export default function About() {
                                 initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 transition={{ delay: i * 0.1 }}
-                                className="p-8 bg-slate-900 rounded-3xl"
+                                className="p-8 bg-gray-50 rounded-3xl border border-gray-200"
                             >
-                                <div className="p-4 bg-slate-800 rounded-2xl w-fit shadow-sm mb-6">
-                                    <v.icon className="text-blue-600" size={32} />
+                                <div className="p-4 bg-white rounded-2xl w-fit shadow-sm mb-6 border border-gray-200">
+                                    <v.icon className="text-green-600" size={32} />
                                 </div>
-                                <h3 className="text-xl font-bold text-white mb-4">{v.title}</h3>
-                                <p className="text-slate-400 leading-relaxed">{v.desc}</p>
+                                <h3 className="text-xl font-bold text-gray-900 mb-4">{v.title}</h3>
+                                <p className="text-gray-600 leading-relaxed">{v.desc}</p>
                             </motion.div>
                         ))}
                     </div>
