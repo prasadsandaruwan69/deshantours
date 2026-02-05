@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Search, MapPin, Calendar, Users, Compass, ChevronRight, Sparkles } from 'lucide-react';
+import { Search, MapPin, Calendar, Users, ChevronRight, Sparkles } from 'lucide-react';
 
 const stats = [
     { label: 'Destinations', value: '50+' },
@@ -13,32 +13,35 @@ const stats = [
 
 export default function Hero() {
     return (
-        <section className="relative h-screen min-h-[750px] w-full overflow-hidden flex flex-col">
+        <section className="relative h-screen w-full overflow-hidden flex flex-col">
             {/* Background Video */}
-            <div className="absolute inset-0 z-0">
+            <div className="absolute inset-0 z-0 overflow-hidden">
                 <video
                     autoPlay
                     loop
                     muted
                     playsInline
-                    className="w-full h-full object-cover scale-[1.05]"
+                    className="absolute inset-0 w-full h-full object-cover min-w-full min-h-full"
                 >
                     <source src="/video.mp4" type="video/mp4" />
                 </video>
-                <div className="absolute inset-0 bg-white/40 transition-colors duration-700" />
-                <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t  to-transparent" />
+
+                {/* Overlays */}
+
             </div>
 
-            <div className="relative z-10 max-w-7xl mx-auto px-6 w-full flex-1 flex flex-col justify-center pt-20">
-                {/* Main Content Area */}
-                <div className="grid lg:grid-cols-2 gap-8 items-center">
-                    <div className="text-left space-y-6">
+
+            {/* Main Content Area - Centered Vertically for Balance */}
+            <div className="relative z-10 max-w-7xl mx-auto px-6 w-full flex-1 flex flex-col justify-center">
+                <div className="grid lg:grid-cols-2 gap-12 items-center">
+                    <div className="text-left space-y-8">
                         <motion.div
                             initial={{ opacity: 0, x: -20 }}
                             animate={{ opacity: 1, x: 0 }}
-                            className="inline-flex items-center gap-2.5 px-4 py-1.5 bg-green-500/10 backdrop-blur-2xl border border-green-400/20 rounded-full text-green-600 text-[9px] font-black uppercase tracking-[0.2em]"
+                            transition={{ duration: 0.6 }}
+                            className="inline-flex items-center gap-2.5 px-5 py-2 bg-green-500/10 backdrop-blur-2xl border border-green-500/20 rounded-full text-green-600 text-[11px] font-black uppercase tracking-[0.2em]"
                         >
-                            <Sparkles size={12} className="animate-pulse" />
+                            <Sparkles size={14} className="animate-pulse" />
                             Discover Authentic Ceylon
                         </motion.div>
 
@@ -46,88 +49,84 @@ export default function Hero() {
                             initial={{ opacity: 0, y: 30 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, delay: 0.2 }}
+                            className="space-y-6"
                         >
-                            <h1 className="text-8xl md:text-[10rem] font-black text-gray-900 leading-[0.75] tracking-[ -0.05em] mb-10">
+                            <h1 className="text-6xl md:text-[7.5rem] font-black text-slate-900 leading-[0.85] tracking-tighter">
                                 Explore <br />
-                                <span className="text-gradient inline-block pb-4">Sri Lanka</span>
+                                <span className="text-gradient to-blue-600 from-blue-800">Sri Lanka</span>
                             </h1>
-                            <p className="text-xl md:text-3xl text-gray-700 max-w-3xl font-semibold leading-snug opacity-90">
-                                Ancient wonders, misty highlands, and golden shores. Let Deshan Tours guide you through the heart of the Indian Ocean.
+                            <p className="text-lg md:text-2xl text-slate-800 max-w-2xl font-medium leading-relaxed opacity-90">
+                                Ancient wonders, misty highlands, and golden shores. Experience the heart of the Indian Ocean with Deshan Tours.
                             </p>
                         </motion.div>
 
-                        <div className="flex flex-wrap gap-4 pt-2">
-                            <button className="px-8 py-4 bg-green-500 hover:bg-green-600 text-white rounded-2xl font-black text-[10px] uppercase tracking-widest flex items-center gap-2 transition-all shadow-xl shadow-green-600/20 hover:scale-105 active:scale-95">
-                                Book Now
-                                <ChevronRight size={16} />
-                            </button>
-                            <button className="px-8 py-4 bg-gray-900/5 hover:bg-gray-900/10 backdrop-blur-xl text-gray-900 rounded-2xl font-black text-[10px] uppercase tracking-widest border border-gray-900/10 transition-all">
-                                The Collections
-                            </button>
-                        </div>
+
                     </div>
 
+                    {/* Creative Floating Stats - Parallax Depth */}
+                    <div className="hidden lg:grid grid-cols-2 gap-6 relative">
 
+                    </div>
                 </div>
             </div>
 
-            {/* Floating Search Bar Console - Positioned at the bottom with safe padding */}
-            <div className="relative z-20 pb-16 px-6">
+            {/* Bottom Floating Console - Refined Spacing */}
+            <div className="relative z-20 w-full px-6 pb-12">
                 <motion.div
-                    initial={{ opacity: 0, y: 30 }}
+                    initial={{ opacity: 0, y: 40 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.4 }}
+                    transition={{ duration: 0.8, delay: 0.6 }}
                     className="max-w-6xl mx-auto"
                 >
-                    <div className="glass-card p-2 md:p-3 rounded-3xl md:rounded-[2.5rem] flex flex-col md:flex-row items-center gap-2 animate-glow border-2 border-white/20 dark:border-white/10">
-                        <div className="flex-1 flex items-center gap-4 px-6 py-3 w-full group">
-                            <div className="w-12 h-12 bg-green-500 rounded-2xl shadow-lg flex items-center justify-center transition-transform group-hover:scale-110">
-                                <MapPin className="text-white" size={20} />
+                    <div className="glass-card p-2 md:p-3 rounded-3xl md:rounded-full flex flex-col md:flex-row items-center gap-2 border-4 border-white shadow-2xl">
+                        <div className="flex-1 flex items-center gap-4 px-8 py-3 w-full group">
+                            <div className="w-12 h-12 bg-green-500/10 rounded-2xl flex items-center justify-center transition-all group-hover:bg-green-500">
+                                <MapPin className="text-green-600 group-hover:text-white transition-colors" size={20} />
                             </div>
-                            <div className="text-left flex-1 min-w-[100px]">
-                                <p className="text-[8px] font-black text-green-600 uppercase tracking-widest mb-1 opacity-60">Destination</p>
+                            <div className="text-left flex-1 min-w-[120px]">
+                                <p className="text-[9px] font-black text-green-600 uppercase tracking-[0.2em] mb-1 opacity-60">Location</p>
                                 <input
                                     type="text"
                                     placeholder="Where to?"
-                                    className="bg-transparent border-none outline-none text-gray-900 w-full font-black text-lg placeholder:text-gray-400"
+                                    className="bg-transparent border-none outline-none text-slate-900 w-full font-bold text-base placeholder:text-slate-400"
                                 />
                             </div>
                         </div>
 
-                        <div className="hidden md:block w-px h-10 bg-gray-200" />
+                        <div className="hidden md:block w-px h-12 bg-slate-200" />
 
-                        <div className="flex-1 flex items-center gap-4 px-6 py-3 w-full group">
-                            <div className="w-12 h-12 bg-green-500 rounded-2xl shadow-lg flex items-center justify-center transition-transform group-hover:scale-110">
-                                <Calendar className="text-white" size={20} />
+                        <div className="flex-1 flex items-center gap-4 px-8 py-3 w-full group">
+                            <div className="w-12 h-12 bg-green-500/10 rounded-2xl flex items-center justify-center transition-all group-hover:bg-green-500">
+                                <Calendar className="text-green-600 group-hover:text-white transition-colors" size={20} />
                             </div>
-                            <div className="text-left flex-1 min-w-[100px]">
-                                <p className="text-[8px] font-black text-green-600 uppercase tracking-widest mb-1 opacity-60">Travel Date</p>
+                            <div className="text-left flex-1 min-w-[120px]">
+                                <p className="text-[9px] font-black text-green-600 uppercase tracking-[0.2em] mb-1 opacity-60">Date</p>
                                 <input
                                     type="text"
-                                    placeholder="Select Date"
-                                    className="bg-transparent border-none outline-none text-gray-900 w-full font-black text-lg placeholder:text-gray-400"
+                                    placeholder="When next?"
+                                    className="bg-transparent border-none outline-none text-slate-900 w-full font-bold text-base placeholder:text-slate-400"
                                 />
                             </div>
                         </div>
 
-                        <div className="hidden md:block w-px h-10 bg-gray-200" />
+                        <div className="hidden md:block w-px h-12 bg-slate-200" />
 
-                        <div className="flex-1 flex items-center gap-4 px-6 py-3 w-full group">
-                            <div className="w-12 h-12 bg-green-500 rounded-2xl shadow-lg flex items-center justify-center transition-transform group-hover:scale-110">
-                                <Users className="text-white" size={20} />
+                        <div className="flex-1 flex items-center gap-4 px-8 py-3 w-full group">
+                            <div className="w-12 h-12 bg-green-500/10 rounded-2xl flex items-center justify-center transition-all group-hover:bg-green-500">
+                                <Users className="text-green-600 group-hover:text-white transition-colors" size={20} />
                             </div>
-                            <div className="text-left flex-1 min-w-[100px]">
-                                <p className="text-[8px] font-black text-green-600 uppercase tracking-widest mb-1 opacity-60">Guests</p>
+                            <div className="text-left flex-1 min-w-[120px]">
+                                <p className="text-[9px] font-black text-green-600 uppercase tracking-[0.2em] mb-1 opacity-60">Travelers</p>
                                 <input
                                     type="text"
-                                    placeholder="How many?"
-                                    className="bg-transparent border-none outline-none text-gray-900 w-full font-black text-lg placeholder:text-gray-400"
+                                    placeholder="Add friends"
+                                    className="bg-transparent border-none outline-none text-slate-900 w-full font-bold text-base placeholder:text-slate-400"
                                 />
                             </div>
                         </div>
 
-                        <button className="w-full md:w-auto px-10 py-5 bg-green-500 text-white rounded-[1.5rem] md:rounded-[2rem] font-black text-lg uppercase tracking-widest flex items-center justify-center gap-3 transition-all hover:bg-green-600 shadow-2xl group">
-                            <Search size={22} className="group-hover:rotate-12 transition-transform" />
+                        <button className="w-full md:w-auto px-12 py-5 bg-green-500 text-white rounded-full font-black text-sm uppercase tracking-widest flex items-center justify-center gap-3 transition-all hover:bg-slate-900 shadow-xl group">
+                            <Search size={20} className="group-hover:rotate-12 transition-transform" />
                             <span>Explore</span>
                         </button>
                     </div>

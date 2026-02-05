@@ -1,14 +1,32 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { Plane, Instagram, Facebook, Twitter, Mail, Phone, MapPin, ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
 
 export default function Footer() {
     return (
-        <footer className="bg-gray-50 text-gray-600 pt-32 pb-16 px-6 relative overflow-hidden">
-            {/* Background Glow */}
-            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-green-500/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2" />
+        <footer className="relative bg-white text-gray-600 pt-32 pb-16 px-6 overflow-hidden border-t border-slate-100">
+            {/* Background Image Container with Float Animation */}
+            <motion.div
+                animate={{ y: [-20, 20] }}
+                transition={{
+                    duration: 10,
+                    repeat: Infinity,
+                    repeatType: "reverse",
+                    ease: "easeInOut"
+                }}
+                className="absolute inset-0 z-0"
+            >
+                <Image
+                    src="/footer_bg_image.png"
+                    alt="Footer Background"
+                    fill
+                    className="object-cover opacity-40 scale-110"
+                />
+            </motion.div>
+            <div className="absolute inset-0 bg-gradient-to-t from-white via-white/30 to-white/10 z-0" />
 
             <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-16 relative z-10">
                 {/* Brand Section */}

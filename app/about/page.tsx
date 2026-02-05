@@ -15,11 +15,11 @@ export default function About() {
                     <div className="flex flex-col lg:flex-row items-center gap-16 mb-32">
                         <div className="lg:w-1/2">
                             <span className="text-green-600 font-bold uppercase tracking-widest text-sm mb-4 block">Our Story</span>
-                            <h1 className="text-5xl font-extrabold text-gray-900 mb-8">Crafting Memories Since 2010</h1>
-                            <p className="text-lg text-gray-600 mb-6 leading-relaxed">
+                            <h1 className="topic-title mb-8">Crafting Memories Since 2010</h1>
+                            <p className="content-text mb-6">
                                 Deshan Tours started with a simple belief: travel should be more than just visiting places; it should be about connecting with cultures and creating lifelong memories.
                             </p>
-                            <p className="text-lg text-gray-600 mb-8 leading-relaxed">
+                            <p className="content-text mb-8">
                                 What began as a small family-run agency in Sri Lanka has grown into a global travel brand, trusted by thousands of travelers from every corner of the world.
                             </p>
                             <div className="grid grid-cols-2 gap-8">

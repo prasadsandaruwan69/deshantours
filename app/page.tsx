@@ -54,10 +54,10 @@ export default function Home() {
                 <span className="text-green-600 font-bold tracking-widest uppercase text-sm mb-4 block">
                   Top Picks
                 </span>
-                <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4">
+                <h2 className="sub-topic-title mb-4">
                   Explore Destinations
                 </h2>
-                <p className="text-gray-600 max-w-xl">
+                <p className="content-text max-w-xl">
                   Discover our handpicked destinations for your next unforgettable journey. From tropical paradises to mountain retreats.
                 </p>
               </div>
@@ -124,10 +124,10 @@ export default function Home() {
 
               <div className="relative z-10 max-w-2xl mx-auto">
                 <Plane className="w-16 h-16 text-white/40 mx-auto mb-8 animate-bounce" />
-                <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-8">
+                <h2 className="sub-topic-title text-white mb-8">
                   Ready to start your next journey?
                 </h2>
-                <p className="text-green-100 text-lg mb-12">
+                <p className="text-green-50 text-lg md:text-xl font-medium mb-12 max-w-xl mx-auto leading-relaxed">
                   Join over 10,000+ happy travelers who explored the world with Deshan Tours. Special discounts for early bookings!
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">

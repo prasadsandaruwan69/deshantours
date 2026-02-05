@@ -46,43 +46,42 @@ export default function Contact() {
     };
 
     return (
-        <div className="bg-slate-950 min-h-screen">
+        <div className="bg-slate-50 min-h-screen">
             <Navbar />
             <main className="pt-32 pb-24 px-6">
                 <div className="max-w-7xl mx-auto">
                     <div className="flex flex-col lg:flex-row gap-16">
                         <div className="lg:w-1/3">
-                            <h1 className="text-5xl font-extrabold text-white mb-8">Get in Touch</h1>
-                            <p className="text-lg text-slate-400 mb-12">
+                            <h1 className="topic-title mb-8">Get in Touch</h1>
+                            <p className="content-text mb-12">
                                 Have questions about our packages or want a custom itinerary? Our team is here to help you 24/7.
                             </p>
-
                             <div className="space-y-8">
                                 <div className="flex gap-6">
-                                    <div className="w-14 h-14 bg-blue-100 dark:bg-blue-900/30 rounded-2xl flex items-center justify-center shrink-0">
+                                    <div className="w-14 h-14 bg-blue-100 rounded-2xl flex items-center justify-center shrink-0">
                                         <Mail className="text-blue-600" size={24} />
                                     </div>
                                     <div>
-                                        <h4 className="font-bold text-white mb-1">Email us</h4>
-                                        <p className="text-slate-500">hello@deshantours.com</p>
+                                        <h4 className="font-bold text-slate-900 mb-1">Email us</h4>
+                                        <p className="text-slate-600">hello@deshantours.com</p>
                                     </div>
                                 </div>
                                 <div className="flex gap-6">
-                                    <div className="w-14 h-14 bg-emerald-100 dark:bg-emerald-900/30 rounded-2xl flex items-center justify-center shrink-0">
+                                    <div className="w-14 h-14 bg-emerald-100 rounded-2xl flex items-center justify-center shrink-0">
                                         <Phone className="text-emerald-600" size={24} />
                                     </div>
                                     <div>
-                                        <h4 className="font-bold text-white mb-1">Call us</h4>
-                                        <p className="text-slate-500">+1 (234) 567-890</p>
+                                        <h4 className="font-bold text-slate-900 mb-1">Call us</h4>
+                                        <p className="text-slate-600">+1 (234) 567-890</p>
                                     </div>
                                 </div>
                                 <div className="flex gap-6">
-                                    <div className="w-14 h-14 bg-purple-100 dark:bg-purple-900/30 rounded-2xl flex items-center justify-center shrink-0">
+                                    <div className="w-14 h-14 bg-purple-100 rounded-2xl flex items-center justify-center shrink-0">
                                         <MapPin className="text-purple-600" size={24} />
                                     </div>
                                     <div>
-                                        <h4 className="font-bold text-white mb-1">Visit us</h4>
-                                        <p className="text-slate-500">123 Travel Lane, Adventure City</p>
+                                        <h4 className="font-bold text-slate-900 mb-1">Visit us</h4>
+                                        <p className="text-slate-600">123 Travel Lane, Adventure City</p>
                                     </div>
                                 </div>
                             </div>
@@ -92,7 +91,7 @@ export default function Contact() {
                             <motion.div
                                 initial={{ opacity: 0, scale: 0.95 }}
                                 animate={{ opacity: 1, scale: 1 }}
-                                className="bg-slate-900 p-8 md:p-12 rounded-[3rem] shadow-2xl border border-white/5"
+                                className="bg-white p-8 md:p-12 rounded-[3rem] shadow-xl border border-slate-200"
                             >
                                 {status && (
                                     <div className={`mb-8 p-6 rounded-2xl text-center font-bold ${status.type === 'success' ? 'bg-emerald-500/10 text-emerald-500 border border-emerald-500/20' : 'bg-red-500/10 text-red-500 border border-red-500/20'
@@ -103,47 +102,47 @@ export default function Contact() {
 
                                 <form className="grid grid-cols-1 md:grid-cols-2 gap-6" onSubmit={handleSubmit}>
                                     <div className="space-y-2">
-                                        <label className="text-sm font-bold text-slate-300 ml-1">Full Name</label>
+                                        <label className="text-sm font-bold text-slate-600 ml-1">Full Name</label>
                                         <input
                                             type="text"
                                             required
                                             value={formData.name}
                                             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                                             placeholder="John Doe"
-                                            className="w-full px-6 py-4 bg-slate-800 rounded-2xl border-none outline-none focus:ring-2 ring-blue-500 transition-all shadow-inner text-white placeholder:text-slate-500"
+                                            className="w-full px-6 py-4 bg-slate-50 rounded-2xl border border-slate-200 outline-none focus:ring-2 ring-blue-500/20 focus:border-blue-500 transition-all text-slate-900 placeholder:text-slate-400"
                                         />
                                     </div>
                                     <div className="space-y-2">
-                                        <label className="text-sm font-bold text-slate-300 ml-1">Email Address</label>
+                                        <label className="text-sm font-bold text-slate-600 ml-1">Email Address</label>
                                         <input
                                             type="email"
                                             required
                                             value={formData.email}
                                             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                                             placeholder="john@example.com"
-                                            className="w-full px-6 py-4 bg-slate-800 rounded-2xl border-none outline-none focus:ring-2 ring-blue-500 transition-all shadow-inner text-white placeholder:text-slate-500"
+                                            className="w-full px-6 py-4 bg-slate-50 rounded-2xl border border-slate-200 outline-none focus:ring-2 ring-blue-500/20 focus:border-blue-500 transition-all text-slate-900 placeholder:text-slate-400"
                                         />
                                     </div>
                                     <div className="md:col-span-2 space-y-2">
-                                        <label className="text-sm font-bold text-slate-300 ml-1">Subject</label>
+                                        <label className="text-sm font-bold text-slate-600 ml-1">Subject</label>
                                         <input
                                             type="text"
                                             required
                                             value={formData.subject}
                                             onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                                            placeholder="I want to book a trip to Bali"
-                                            className="w-full px-6 py-4 bg-slate-800 rounded-2xl border-none outline-none focus:ring-2 ring-blue-500 transition-all shadow-inner text-white placeholder:text-slate-500"
+                                            placeholder="I want to book a trip to Sri Lanka"
+                                            className="w-full px-6 py-4 bg-slate-50 rounded-2xl border border-slate-200 outline-none focus:ring-2 ring-blue-500/20 focus:border-blue-500 transition-all text-slate-900 placeholder:text-slate-400"
                                         />
                                     </div>
                                     <div className="md:col-span-2 space-y-2">
-                                        <label className="text-sm font-bold text-slate-300 ml-1">Your Message</label>
+                                        <label className="text-sm font-bold text-slate-600 ml-1">Your Message</label>
                                         <textarea
                                             rows={6}
                                             required
                                             value={formData.message}
                                             onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                                             placeholder="How can we help you?"
-                                            className="w-full px-6 py-4 bg-slate-800 rounded-2xl border-none outline-none focus:ring-2 ring-blue-500 transition-all shadow-inner resize-none text-white placeholder:text-slate-500"
+                                            className="w-full px-6 py-4 bg-slate-50 rounded-2xl border border-slate-200 outline-none focus:ring-2 ring-blue-500/20 focus:border-blue-500 transition-all resize-none text-slate-900 placeholder:text-slate-400"
                                         />
                                     </div>
                                     <div className="md:col-span-2">

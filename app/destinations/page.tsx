@@ -63,10 +63,10 @@ export default function Destinations() {
                         <span className="text-green-600 font-bold tracking-widest uppercase text-sm mb-4 block">
                             Explore Sri Lanka
                         </span>
-                        <h1 className="text-5xl md:text-7xl font-extrabold text-gray-900 mb-6">
+                        <h1 className="topic-title mb-6">
                             Discover Amazing Destinations
                         </h1>
-                        <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                        <p className="content-text max-w-3xl mx-auto">
                             From ancient fortresses to pristine beaches, explore the pearl of the Indian Ocean's most breathtaking locations
                         </p>
                     </motion.div>

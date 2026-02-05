@@ -7,6 +7,20 @@
   --brand-primary: #22c55e;
   --brand-secondary: #16a34a;
   --brand-accent: #10b981;
+
+  /* Typography Sizes */
+  --topic-size: 3rem;
+  /* 48px */
+  --topic-size-md: 4.5rem;
+  /* 72px */
+  --sub-topic-size: 1.875rem;
+  /* 30px */
+  --sub-topic-size-md: 2.5rem;
+  /* 40px */
+  --content-size: 1rem;
+  /* 16px */
+  --content-size-md: 1.125rem;
+  /* 18px */
 }
 
 @theme inline {
@@ -47,6 +61,18 @@ body {
   overflow-x: hidden;
   font-family: var(--font-geist-sans), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
+}
+
+.topic-title {
+  @apply text-5xl md:text-7xl font-black text-slate-900 tracking-tight leading-[1.1];
+}
+
+.sub-topic-title {
+  @apply text-3xl md:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight;
+}
+
+.content-text {
+  @apply text-base md:text-lg text-slate-600 leading-relaxed font-medium;
 }
 
 .text-gradient {

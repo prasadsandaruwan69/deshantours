@@ -42,17 +42,17 @@ export default function DestinationDetail() {
 
     if (loading) {
         return (
-            <div className="bg-slate-950 min-h-screen flex items-center justify-center">
-                <div className="text-white text-xl">Loading...</div>
+            <div className="bg-slate-50 min-h-screen flex items-center justify-center">
+                <div className="text-slate-900 text-xl font-bold">Loading...</div>
             </div>
         );
     }
 
     if (!destination) {
         return (
-            <div className="bg-slate-950 min-h-screen flex items-center justify-center">
+            <div className="bg-slate-50 min-h-screen flex items-center justify-center">
                 <div className="text-center">
-                    <h1 className="text-4xl font-bold text-white mb-4">Destination Not Found</h1>
+                    <h1 className="text-4xl font-bold text-slate-900 mb-4">Destination Not Found</h1>
                     <Link href="/destinations" className="text-blue-500 hover:underline">
                         Back to Destinations
                     </Link>
@@ -64,7 +64,7 @@ export default function DestinationDetail() {
     const galleryImages = [destination.main_image, ...destination.images];
 
     return (
-        <div className="bg-slate-950 min-h-screen">
+        <div className="bg-slate-50 min-h-screen">
             <Navbar />
 
             {/* Hero Section with Image Gallery */}
@@ -75,7 +75,7 @@ export default function DestinationDetail() {
                         <motion.button
                             initial={{ opacity: 0, x: -20 }}
                             animate={{ opacity: 1, x: 0 }}
-                            className="flex items-center gap-2 text-slate-400 hover:text-white mb-8 transition-colors"
+                            className="flex items-center gap-2 text-slate-500 hover:text-slate-900 mb-8 transition-colors"
                         >
                             <ArrowLeft size={20} />
                             <span className="font-bold">Back to Destinations</span>
@@ -104,11 +104,11 @@ export default function DestinationDetail() {
 
                         {/* Title Overlay */}
                         <div className="absolute bottom-8 left-8 right-8">
-                            <div className="flex items-center gap-2 text-blue-400 font-bold uppercase tracking-widest mb-3">
+                            <div className="flex items-center gap-2 text-blue-100 font-bold uppercase tracking-widest mb-3">
                                 <MapPin size={18} />
                                 {destination.region}
                             </div>
-                            <h1 className="text-6xl md:text-7xl font-black text-white">{destination.name}</h1>
+                            <h1 className="topic-title text-white">{destination.name}</h1>
                         </div>
                     </motion.div>
 
@@ -143,18 +143,18 @@ export default function DestinationDetail() {
                             <motion.div
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
-                                className="bg-slate-900/50 backdrop-blur-xl border border-white/10 rounded-3xl p-8"
+                                className="bg-white border border-slate-200 rounded-3xl p-8 shadow-sm"
                             >
-                                <h2 className="text-3xl font-bold text-white mb-4 flex items-center gap-3">
-                                    <Compass className="text-blue-500" size={32} />
+                                <h2 className="sub-topic-title mb-4 flex items-center gap-3">
+                                    <Compass className="text-blue-600" size={32} strokeWidth={3} />
                                     About {destination.name}
                                 </h2>
-                                <p className="text-slate-300 text-lg leading-relaxed mb-6">
+                                <p className="content-text mb-6">
                                     {destination.description}
                                 </p>
-                                <div className="bg-blue-500/10 border border-blue-500/20 rounded-2xl p-6">
-                                    <h3 className="text-xl font-bold text-blue-400 mb-3">What Makes It Special</h3>
-                                    <p className="text-slate-300 leading-relaxed">
+                                <div className="bg-blue-50 border border-blue-100 rounded-2xl p-6">
+                                    <h3 className="text-xl font-bold text-blue-600 mb-3">What Makes It Special</h3>
+                                    <p className="text-slate-700 leading-relaxed">
                                         {destination.speciality}
                                     </p>
                                 </div>
@@ -165,10 +165,10 @@ export default function DestinationDetail() {
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.1 }}
-                                className="bg-slate-900/50 backdrop-blur-xl border border-white/10 rounded-3xl p-8"
+                                className="bg-white border border-slate-200 rounded-3xl p-8 shadow-sm"
                             >
-                                <h2 className="text-3xl font-bold text-white mb-6 flex items-center gap-3">
-                                    <Star className="text-yellow-500" size={32} />
+                                <h2 className="sub-topic-title mb-6 flex items-center gap-3">
+                                    <Star className="text-yellow-500" size={32} fill="currentColor" />
                                     Things to Do
                                 </h2>
                                 <div className="grid md:grid-cols-2 gap-4">
@@ -178,10 +178,10 @@ export default function DestinationDetail() {
                                             initial={{ opacity: 0, x: -20 }}
                                             animate={{ opacity: 1, x: 0 }}
                                             transition={{ delay: idx * 0.05 }}
-                                            className="flex items-start gap-3 bg-slate-800/50 rounded-xl p-4 hover:bg-slate-800 transition-colors"
+                                            className="flex items-start gap-3 bg-slate-50 rounded-xl p-4 hover:bg-slate-100 transition-colors border border-slate-100"
                                         >
-                                            <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0" />
-                                            <span className="text-slate-300">{activity}</span>
+                                            <div className="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0" />
+                                            <span className="text-slate-600">{activity}</span>
                                         </motion.div>
                                     ))}
                                 </div>
@@ -192,13 +192,13 @@ export default function DestinationDetail() {
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.2 }}
-                                className="bg-slate-900/50 backdrop-blur-xl border border-white/10 rounded-3xl p-8"
+                                className="bg-white border border-slate-200 rounded-3xl p-8 shadow-sm"
                             >
-                                <h2 className="text-3xl font-bold text-white mb-6 flex items-center gap-3">
-                                    <MapPin className="text-red-500" size={32} />
+                                <h2 className="sub-topic-title mb-6 flex items-center gap-3">
+                                    <MapPin className="text-red-500" size={32} strokeWidth={3} />
                                     Location
                                 </h2>
-                                <div className="aspect-video rounded-2xl overflow-hidden bg-slate-800">
+                                <div className="aspect-video rounded-2xl overflow-hidden bg-slate-100">
                                     <iframe
                                         src={destination.map_embed_url}
                                         width="100%"
@@ -209,7 +209,7 @@ export default function DestinationDetail() {
                                         referrerPolicy="no-referrer-when-downgrade"
                                     />
                                 </div>
-                                <div className="mt-4 text-slate-400 text-sm">
+                                <div className="mt-4 text-slate-500 text-sm">
                                     <p>Coordinates: {destination.latitude}, {destination.longitude}</p>
                                 </div>
                             </motion.div>
@@ -258,23 +258,23 @@ export default function DestinationDetail() {
                                 initial={{ opacity: 0, x: 20 }}
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ delay: 0.1 }}
-                                className="bg-slate-900/50 backdrop-blur-xl border border-white/10 rounded-3xl p-6"
+                                className="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm"
                             >
-                                <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-                                    <Camera className="text-yellow-500" size={24} />
+                                <h3 className="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
+                                    <Camera className="text-yellow-600" size={24} />
                                     Photography Tips
                                 </h3>
-                                <ul className="space-y-2 text-slate-300 text-sm">
+                                <ul className="space-y-2 text-slate-600 text-sm">
                                     <li className="flex items-start gap-2">
-                                        <span className="text-blue-500">•</span>
+                                        <span className="text-blue-600 font-bold">•</span>
                                         <span>Best light: Early morning or golden hour</span>
                                     </li>
                                     <li className="flex items-start gap-2">
-                                        <span className="text-blue-500">•</span>
+                                        <span className="text-blue-600 font-bold">•</span>
                                         <span>Bring wide-angle lens for landscapes</span>
                                     </li>
                                     <li className="flex items-start gap-2">
-                                        <span className="text-blue-500">•</span>
+                                        <span className="text-blue-600 font-bold">•</span>
                                         <span>Respect local customs when photographing</span>
                                     </li>
                                 </ul>

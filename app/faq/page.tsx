@@ -126,7 +126,7 @@ export default function FAQ() {
     };
 
     return (
-        <div className="bg-slate-950 min-h-screen">
+        <div className="bg-slate-50 min-h-screen">
             <Navbar />
 
             {/* Hero Section */}
@@ -145,10 +145,10 @@ export default function FAQ() {
                         <div className="w-20 h-20 bg-blue-600 rounded-3xl flex items-center justify-center mx-auto mb-6">
                             <HelpCircle size={40} className="text-white" />
                         </div>
-                        <h1 className="text-5xl md:text-7xl font-extrabold text-white mb-6">
+                        <h1 className="topic-title mb-6">
                             Frequently Asked Questions
                         </h1>
-                        <p className="text-xl text-slate-400">
+                        <p className="content-text max-w-2xl mx-auto">
                             Everything you need to know about traveling to Sri Lanka with Deshan Tours
                         </p>
                     </motion.div>
@@ -166,7 +166,7 @@ export default function FAQ() {
                             transition={{ delay: categoryIndex * 0.1 }}
                         >
                             {/* Category Header */}
-                            <h2 className="text-3xl font-bold text-white mb-6 flex items-center gap-3">
+                            <h2 className="text-3xl font-bold text-slate-900 mb-6 flex items-center gap-3">
                                 <div className="w-2 h-8 bg-blue-600 rounded-full" />
                                 {category.category}
                             </h2>
@@ -183,14 +183,14 @@ export default function FAQ() {
                                             initial={{ opacity: 0, y: 10 }}
                                             animate={{ opacity: 1, y: 0 }}
                                             transition={{ delay: (categoryIndex * 0.1) + (qIndex * 0.05) }}
-                                            className="bg-slate-900/50 backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden hover:border-white/20 transition-all"
+                                            className="bg-white border border-slate-200 rounded-2xl overflow-hidden hover:border-blue-500/20 shadow-sm hover:shadow-md transition-all"
                                         >
                                             {/* Question */}
                                             <button
                                                 onClick={() => toggleQuestion(questionId)}
-                                                className="w-full p-6 flex items-center justify-between text-left hover:bg-slate-800/50 transition-colors"
+                                                className="w-full p-6 flex items-center justify-between text-left hover:bg-slate-50 transition-colors"
                                             >
-                                                <span className="text-lg font-bold text-white pr-4">
+                                                <span className="text-lg font-bold text-slate-900 pr-4">
                                                     {faq.q}
                                                 </span>
                                                 <ChevronDown
@@ -209,8 +209,8 @@ export default function FAQ() {
                                                     transition={{ duration: 0.3 }}
                                                     className="px-6 pb-6"
                                                 >
-                                                    <div className="pt-4 border-t border-white/10">
-                                                        <p className="text-slate-300 leading-relaxed">
+                                                    <div className="pt-4 border-t border-slate-100">
+                                                        <p className="content-text">
                                                             {faq.a}
                                                         </p>
                                                     </div>

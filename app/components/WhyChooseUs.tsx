@@ -55,7 +55,7 @@ export default function WhyChooseUs() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.1 }}
-                        className="text-4xl md:text-6xl font-extrabold text-gray-900 mb-6"
+                        className="sub-topic-title mb-6"
                     >
                         Your Perfect Travel Partner
                     </motion.h2>
@@ -64,7 +64,7 @@ export default function WhyChooseUs() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.2 }}
-                        className="text-xl text-gray-600 max-w-3xl mx-auto"
+                        className="content-text max-w-3xl mx-auto"
                     >
                         We combine local expertise with world-class service to create unforgettable experiences across Sri Lanka
                     </motion.p>

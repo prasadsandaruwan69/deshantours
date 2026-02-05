@@ -42,17 +42,17 @@ export default function PackageDetail() {
 
     if (loading) {
         return (
-            <div className="bg-slate-950 min-h-screen flex items-center justify-center">
-                <div className="text-white text-xl">Loading...</div>
+            <div className="bg-slate-50 min-h-screen flex items-center justify-center">
+                <div className="text-slate-900 text-xl font-bold">Loading...</div>
             </div>
         );
     }
 
     if (!pkg) {
         return (
-            <div className="bg-slate-950 min-h-screen flex items-center justify-center">
+            <div className="bg-slate-50 min-h-screen flex items-center justify-center">
                 <div className="text-center">
-                    <h1 className="text-4xl font-bold text-white mb-4">Package Not Found</h1>
+                    <h1 className="text-4xl font-bold text-slate-900 mb-4">Package Not Found</h1>
                     <Link href="/packages" className="text-blue-500 hover:underline">
                         Back to Packages
                     </Link>
@@ -62,7 +62,7 @@ export default function PackageDetail() {
     }
 
     return (
-        <div className="bg-slate-950 min-h-screen">
+        <div className="bg-slate-50 min-h-screen">
             <Navbar />
 
             {/* Hero Section */}
@@ -73,7 +73,7 @@ export default function PackageDetail() {
                         <motion.button
                             initial={{ opacity: 0, x: -20 }}
                             animate={{ opacity: 1, x: 0 }}
-                            className="flex items-center gap-2 text-slate-400 hover:text-white mb-8 transition-colors"
+                            className="flex items-center gap-2 text-slate-500 hover:text-slate-900 mb-8 transition-colors"
                         >
                             <ArrowLeft size={20} />
                             <span className="font-bold">Back to Packages</span>
@@ -102,8 +102,8 @@ export default function PackageDetail() {
 
                         {/* Title */}
                         <div className="absolute bottom-8 left-8 right-8">
-                            <h1 className="text-5xl md:text-6xl font-black text-white mb-4">{pkg.name}</h1>
-                            <p className="text-xl text-slate-200 max-w-3xl">{pkg.description}</p>
+                            <h1 className="topic-title text-white mb-4">{pkg.name}</h1>
+                            <p className="content-text text-white/90 max-w-3xl">{pkg.description}</p>
                         </div>
                     </motion.div>
 
@@ -114,11 +114,11 @@ export default function PackageDetail() {
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.1 }}
-                                className="bg-slate-900/50 backdrop-blur-xl border border-white/10 rounded-2xl p-6 text-center"
+                                className="bg-white border border-slate-200 rounded-2xl p-6 text-center shadow-sm"
                             >
-                                <Clock className="text-blue-500 mx-auto mb-2" size={32} />
-                                <div className="text-3xl font-black text-white mb-1">{pkg.days}</div>
-                                <div className="text-slate-400 text-sm font-semibold">Days</div>
+                                <Clock className="text-blue-600 mx-auto mb-2" size={32} />
+                                <div className="text-3xl font-black text-slate-900 mb-1">{pkg.days}</div>
+                                <div className="text-slate-500 text-sm font-semibold">Days</div>
                             </motion.div>
                         )}
                         {pkg.price > 0 && (
@@ -137,21 +137,21 @@ export default function PackageDetail() {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.3 }}
-                            className="bg-slate-900/50 backdrop-blur-xl border border-white/10 rounded-2xl p-6 text-center"
+                            className="bg-white border border-slate-200 rounded-2xl p-6 text-center shadow-sm"
                         >
                             <MapPin className="text-emerald-500 mx-auto mb-2" size={32} />
-                            <div className="text-2xl font-black text-white mb-1">Sri Lanka</div>
-                            <div className="text-slate-400 text-sm font-semibold">Destination</div>
+                            <div className="text-2xl font-black text-slate-900 mb-1">Sri Lanka</div>
+                            <div className="text-slate-500 text-sm font-semibold">Destination</div>
                         </motion.div>
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.4 }}
-                            className="bg-slate-900/50 backdrop-blur-xl border border-white/10 rounded-2xl p-6 text-center"
+                            className="bg-white border border-slate-200 rounded-2xl p-6 text-center shadow-sm"
                         >
                             <Users className="text-yellow-500 mx-auto mb-2" size={32} />
-                            <div className="text-2xl font-black text-white mb-1">Private</div>
-                            <div className="text-slate-400 text-sm font-semibold">Group Type</div>
+                            <div className="text-2xl font-black text-slate-900 mb-1">Private</div>
+                            <div className="text-slate-500 text-sm font-semibold">Group Type</div>
                         </motion.div>
                     </div>
                 </div>
@@ -167,58 +167,58 @@ export default function PackageDetail() {
                             <motion.div
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
-                                className="bg-slate-900/50 backdrop-blur-xl border border-white/10 rounded-3xl p-8"
+                                className="bg-white border border-slate-200 rounded-3xl p-8 shadow-sm"
                             >
-                                <h2 className="text-3xl font-bold text-white mb-6 flex items-center gap-3">
-                                    <Check className="text-emerald-500" size={32} />
+                                <h2 className="sub-topic-title mb-6 flex items-center gap-3">
+                                    <Check className="text-emerald-600" size={32} strokeWidth={3} />
                                     What's Included
                                 </h2>
 
                                 <div className="grid md:grid-cols-2 gap-6">
                                     {pkg.hotel_included && (
                                         <div className="flex gap-4">
-                                            <div className="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
-                                                <Hotel className="text-blue-500" size={24} />
+                                            <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center flex-shrink-0">
+                                                <Hotel className="text-blue-600" size={24} />
                                             </div>
                                             <div>
-                                                <div className="font-bold text-white mb-1">Accommodation</div>
-                                                <div className="text-slate-400 text-sm">{pkg.hotel_details}</div>
+                                                <div className="font-bold text-slate-900 mb-1">Accommodation</div>
+                                                <div className="text-slate-600 text-sm">{pkg.hotel_details}</div>
                                             </div>
                                         </div>
                                     )}
 
                                     {pkg.transport_included && (
                                         <div className="flex gap-4">
-                                            <div className="w-12 h-12 bg-emerald-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
-                                                <Car className="text-emerald-500" size={24} />
+                                            <div className="w-12 h-12 bg-emerald-50 rounded-xl flex items-center justify-center flex-shrink-0">
+                                                <Car className="text-emerald-600" size={24} />
                                             </div>
                                             <div>
-                                                <div className="font-bold text-white mb-1">Transportation</div>
-                                                <div className="text-slate-400 text-sm">{pkg.transport_details}</div>
+                                                <div className="font-bold text-slate-900 mb-1">Transportation</div>
+                                                <div className="text-slate-600 text-sm">{pkg.transport_details}</div>
                                             </div>
                                         </div>
                                     )}
 
                                     {pkg.guide_included && (
                                         <div className="flex gap-4">
-                                            <div className="w-12 h-12 bg-purple-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
-                                                <User className="text-purple-500" size={24} />
+                                            <div className="w-12 h-12 bg-purple-50 rounded-xl flex items-center justify-center flex-shrink-0">
+                                                <User className="text-purple-600" size={24} />
                                             </div>
                                             <div>
-                                                <div className="font-bold text-white mb-1">Tour Guide</div>
-                                                <div className="text-slate-400 text-sm">{pkg.guide_details}</div>
+                                                <div className="font-bold text-slate-900 mb-1">Tour Guide</div>
+                                                <div className="text-slate-600 text-sm">{pkg.guide_details}</div>
                                             </div>
                                         </div>
                                     )}
 
                                     {pkg.meals && (
                                         <div className="flex gap-4">
-                                            <div className="w-12 h-12 bg-yellow-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
-                                                <Utensils className="text-yellow-500" size={24} />
+                                            <div className="w-12 h-12 bg-yellow-50 rounded-xl flex items-center justify-center flex-shrink-0">
+                                                <Utensils className="text-yellow-600" size={24} />
                                             </div>
                                             <div>
-                                                <div className="font-bold text-white mb-1">Meals</div>
-                                                <div className="text-slate-400 text-sm">{pkg.meals}</div>
+                                                <div className="font-bold text-slate-900 mb-1">Meals</div>
+                                                <div className="text-slate-600 text-sm">{pkg.meals}</div>
                                             </div>
                                         </div>
                                     )}
@@ -230,10 +230,10 @@ export default function PackageDetail() {
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.1 }}
-                                className="bg-slate-900/50 backdrop-blur-xl border border-white/10 rounded-3xl p-8"
+                                className="bg-white border border-slate-200 rounded-3xl p-8 shadow-sm"
                             >
-                                <h2 className="text-3xl font-bold text-white mb-6 flex items-center gap-3">
-                                    <Star className="text-yellow-500" size={32} />
+                                <h2 className="sub-topic-title mb-6 flex items-center gap-3">
+                                    <Star className="text-yellow-600" size={32} fill="currentColor" />
                                     Tour Highlights
                                 </h2>
 
@@ -244,10 +244,10 @@ export default function PackageDetail() {
                                             initial={{ opacity: 0, x: -20 }}
                                             animate={{ opacity: 1, x: 0 }}
                                             transition={{ delay: idx * 0.05 }}
-                                            className="flex items-start gap-3 bg-slate-800/50 rounded-xl p-4"
+                                            className="flex items-start gap-3 bg-slate-50 border border-slate-100 rounded-xl p-4"
                                         >
-                                            <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0" />
-                                            <span className="text-slate-300">{highlight}</span>
+                                            <div className="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0" />
+                                            <span className="text-slate-600">{highlight}</span>
                                         </motion.div>
                                     ))}
                                 </div>
@@ -259,10 +259,10 @@ export default function PackageDetail() {
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ delay: 0.2 }}
-                                    className="bg-slate-900/50 backdrop-blur-xl border border-white/10 rounded-3xl p-8"
+                                    className="bg-white border border-slate-200 rounded-3xl p-8 shadow-sm"
                                 >
-                                    <h2 className="text-3xl font-bold text-white mb-6 flex items-center gap-3">
-                                        <Calendar className="text-blue-500" size={32} />
+                                    <h2 className="sub-topic-title mb-6 flex items-center gap-3">
+                                        <Calendar className="text-blue-600" size={32} strokeWidth={3} />
                                         Day-by-Day Itinerary
                                     </h2>
 
@@ -273,23 +273,23 @@ export default function PackageDetail() {
                                                 initial={{ opacity: 0, x: -20 }}
                                                 animate={{ opacity: 1, x: 0 }}
                                                 transition={{ delay: idx * 0.05 }}
-                                                className="bg-slate-800/50 rounded-2xl overflow-hidden border border-white/5 hover:border-white/10 transition-all"
+                                                className="bg-white rounded-2xl overflow-hidden border border-slate-200 hover:border-blue-200 transition-all shadow-sm"
                                             >
                                                 {/* Day Header */}
                                                 <button
                                                     onClick={() => setSelectedDay(selectedDay === day.day ? 0 : day.day)}
-                                                    className="w-full p-6 flex items-center justify-between text-left hover:bg-slate-800/70 transition-colors"
+                                                    className="w-full p-6 flex items-center justify-between text-left hover:bg-slate-50 transition-colors"
                                                 >
                                                     <div className="flex items-center gap-4">
                                                         <div className="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center font-black text-white">
                                                             {day.day}
                                                         </div>
                                                         <div>
-                                                            <div className="text-xl font-bold text-white mb-1">{day.title}</div>
-                                                            <div className="text-slate-400 text-sm line-clamp-1">{day.description}</div>
+                                                            <div className="text-xl font-bold text-slate-900 mb-1">{day.title}</div>
+                                                            <div className="text-slate-500 text-sm line-clamp-1">{day.description}</div>
                                                         </div>
                                                     </div>
-                                                    <div className={`text-blue-500 transition-transform ${selectedDay === day.day ? 'rotate-180' : ''}`}>
+                                                    <div className={`text-blue-600 transition-transform ${selectedDay === day.day ? 'rotate-180' : ''}`}>
                                                         ▼
                                                     </div>
                                                 </button>
@@ -301,14 +301,14 @@ export default function PackageDetail() {
                                                         animate={{ opacity: 1, height: "auto" }}
                                                         className="px-6 pb-6 overflow-hidden"
                                                     >
-                                                        <div className="bg-slate-900/50 rounded-xl p-6 space-y-4">
+                                                        <div className="bg-slate-50 rounded-xl p-6 space-y-4">
                                                             {/* Activities */}
                                                             <div>
-                                                                <div className="text-white font-bold mb-3">Activities</div>
+                                                                <div className="text-slate-900 font-bold mb-3">Activities</div>
                                                                 <div className="space-y-2">
                                                                     {day.activities.map((activity: string, actIdx: number) => (
-                                                                        <div key={actIdx} className="flex items-start gap-2 text-slate-300 text-sm">
-                                                                            <div className="w-1.5 h-1.5 bg-blue-500 rounded-full mt-2 flex-shrink-0" />
+                                                                        <div key={actIdx} className="flex items-start gap-2 text-slate-600 text-sm">
+                                                                            <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0" />
                                                                             <span>{activity}</span>
                                                                         </div>
                                                                     ))}
@@ -316,17 +316,17 @@ export default function PackageDetail() {
                                                             </div>
 
                                                             {/* Accommodation & Meals */}
-                                                            <div className="grid md:grid-cols-2 gap-4 pt-4 border-t border-white/10">
+                                                            <div className="grid md:grid-cols-2 gap-4 pt-4 border-t border-slate-200">
                                                                 {day.accommodation && (
                                                                     <div>
-                                                                        <div className="text-slate-400 text-xs mb-1">Accommodation</div>
-                                                                        <div className="text-white font-semibold">{day.accommodation}</div>
+                                                                        <div className="text-slate-500 text-xs mb-1">Accommodation</div>
+                                                                        <div className="text-slate-900 font-semibold">{day.accommodation}</div>
                                                                     </div>
                                                                 )}
                                                                 {day.meals && (
                                                                     <div>
-                                                                        <div className="text-slate-400 text-xs mb-1">Meals Included</div>
-                                                                        <div className="text-white font-semibold">{day.meals}</div>
+                                                                        <div className="text-slate-500 text-xs mb-1">Meals Included</div>
+                                                                        <div className="text-slate-900 font-semibold">{day.meals}</div>
                                                                     </div>
                                                                 )}
                                                             </div>

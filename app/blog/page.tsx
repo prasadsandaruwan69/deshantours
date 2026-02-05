@@ -40,7 +40,7 @@ export default function Blog() {
         : posts.filter(post => post.category === selectedCategory);
 
     return (
-        <div className="bg-slate-950 min-h-screen">
+        <div className="bg-slate-50 min-h-screen">
             <Navbar />
 
             {/* Hero Section */}
@@ -56,13 +56,13 @@ export default function Blog() {
                         animate={{ opacity: 1, y: 0 }}
                         className="text-center mb-12"
                     >
-                        <span className="text-blue-500 font-bold tracking-widest uppercase text-sm mb-4 block">
+                        <span className="text-blue-600 font-bold tracking-widest uppercase text-sm mb-4 block">
                             Travel Insights
                         </span>
-                        <h1 className="text-5xl md:text-7xl font-extrabold text-white mb-6">
+                        <h1 className="topic-title mb-6">
                             Our Travel Blog
                         </h1>
-                        <p className="text-xl text-slate-400 max-w-3xl mx-auto">
+                        <p className="content-text max-w-3xl mx-auto">
                             Expert tips, guides, and stories to help you plan the perfect Sri Lankan adventure
                         </p>
                     </motion.div>
@@ -80,7 +80,7 @@ export default function Blog() {
                                 onClick={() => setSelectedCategory(category)}
                                 className={`px-6 py-3 rounded-full font-bold text-sm transition-all ${selectedCategory === category
                                     ? "bg-blue-600 text-white shadow-lg shadow-blue-600/30"
-                                    : "bg-slate-900/50 text-slate-400 hover:bg-slate-800 border border-white/10"
+                                    : "bg-white text-slate-500 hover:bg-slate-100 border border-slate-200"
                                     }`}
                             >
                                 {category}
@@ -103,7 +103,7 @@ export default function Blog() {
                                 className="group"
                             >
                                 <Link href={`/blog/${post.slug}`}>
-                                    <div className="bg-slate-900/50 backdrop-blur-xl border border-white/10 rounded-[2rem] overflow-hidden hover:border-white/20 transition-all duration-500 h-full flex flex-col">
+                                    <div className="bg-white border border-slate-200 rounded-[2rem] overflow-hidden hover:border-blue-500/20 hover:shadow-xl transition-all duration-500 h-full flex flex-col group">
                                         {/* Image */}
                                         <div className="relative h-56 overflow-hidden">
                                             <img
@@ -111,7 +111,7 @@ export default function Blog() {
                                                 alt={post.title}
                                                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                                             />
-                                            <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent" />
+                                            <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
 
                                             {/* Category Badge */}
                                             <div className="absolute top-4 left-4">
@@ -136,17 +136,17 @@ export default function Blog() {
                                             </div>
 
                                             {/* Title */}
-                                            <h2 className="text-2xl font-bold text-white mb-3 group-hover:text-blue-400 transition-colors line-clamp-2">
+                                            <h2 className="text-2xl font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors line-clamp-2">
                                                 {post.title}
                                             </h2>
 
                                             {/* Excerpt */}
-                                            <p className="text-slate-400 mb-6 line-clamp-3 flex-1">
+                                            <p className="text-slate-600 mb-6 line-clamp-3 flex-1">
                                                 {post.excerpt}
                                             </p>
 
                                             {/* Read More */}
-                                            <div className="flex items-center gap-2 text-blue-500 font-bold group-hover:gap-4 transition-all">
+                                            <div className="flex items-center gap-2 text-blue-600 font-bold group-hover:gap-4 transition-all">
                                                 <span>Read More</span>
                                                 <ArrowRight size={20} className="group-hover:translate-x-2 transition-transform" />
                                             </div>

@@ -40,17 +40,17 @@ export default function BlogPostDetail() {
 
     if (loading) {
         return (
-            <div className="bg-slate-950 min-h-screen flex items-center justify-center">
-                <div className="text-white text-xl">Loading...</div>
+            <div className="bg-slate-50 min-h-screen flex items-center justify-center">
+                <div className="text-slate-900 text-xl font-bold">Loading...</div>
             </div>
         );
     }
 
     if (!post) {
         return (
-            <div className="bg-slate-950 min-h-screen flex items-center justify-center">
+            <div className="bg-slate-50 min-h-screen flex items-center justify-center">
                 <div className="text-center">
-                    <h1 className="text-4xl font-bold text-white mb-4">Post Not Found</h1>
+                    <h1 className="text-4xl font-bold text-slate-900 mb-4">Post Not Found</h1>
                     <Link href="/blog" className="text-blue-500 hover:underline">
                         Back to Blog
                     </Link>
@@ -60,7 +60,7 @@ export default function BlogPostDetail() {
     }
 
     return (
-        <div className="bg-slate-950 min-h-screen">
+        <div className="bg-slate-50 min-h-screen">
             <Navbar />
 
             {/* Hero Section */}
@@ -71,7 +71,7 @@ export default function BlogPostDetail() {
                         <motion.button
                             initial={{ opacity: 0, x: -20 }}
                             animate={{ opacity: 1, x: 0 }}
-                            className="flex items-center gap-2 text-slate-400 hover:text-white mb-8 transition-colors"
+                            className="flex items-center gap-2 text-slate-500 hover:text-slate-900 mb-8 transition-colors"
                         >
                             <ArrowLeft size={20} />
                             <span className="font-bold">Back to Blog</span>
@@ -82,7 +82,7 @@ export default function BlogPostDetail() {
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="flex flex-wrap items-center gap-6 text-slate-400 text-sm mb-6"
+                        className="flex flex-wrap items-center gap-6 text-slate-600 text-sm mb-6"
                     >
                         <span className="px-4 py-1.5 bg-blue-600 text-white rounded-full text-xs font-bold uppercase tracking-widest">
                             {post.category}
@@ -106,7 +106,7 @@ export default function BlogPostDetail() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.1 }}
-                        className="text-4xl md:text-6xl font-black text-white mb-8 leading-tight"
+                        className="topic-title mb-8"
                     >
                         {post.title}
                     </motion.h1>
@@ -130,19 +130,19 @@ export default function BlogPostDetail() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.3 }}
-                        className="prose prose-invert prose-blue max-w-none"
+                        className="prose prose-blue max-w-none"
                     >
-                        <div className="text-slate-300 text-lg leading-relaxed space-y-6 whitespace-pre-wrap">
+                        <div className="content-text space-y-6 whitespace-pre-wrap">
                             {post.content}
                         </div>
                     </motion.div>
 
                     {/* Tags & Share */}
-                    <div className="mt-16 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-8">
+                    <div className="mt-16 pt-8 border-t border-slate-200 flex flex-col md:flex-row justify-between items-center gap-8">
                         {/* Tags */}
                         <div className="flex flex-wrap gap-2">
                             {post.tags.map((tag, idx) => (
-                                <span key={idx} className="flex items-center gap-1 px-4 py-2 bg-slate-900 border border-white/10 rounded-xl text-slate-400 text-sm font-semibold">
+                                <span key={idx} className="flex items-center gap-1 px-4 py-2 bg-white border border-slate-200 rounded-xl text-slate-600 text-sm font-semibold">
                                     <Tag size={14} />
                                     {tag}
                                 </span>
@@ -156,10 +156,10 @@ export default function BlogPostDetail() {
                                 <button className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white hover:bg-blue-700 transition-colors">
                                     <Facebook size={18} />
                                 </button>
-                                <button className="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center text-white hover:bg-slate-700 transition-colors">
+                                <button className="w-10 h-10 bg-white border border-slate-200 rounded-full flex items-center justify-center text-slate-600 hover:bg-slate-50 transition-colors">
                                     <Twitter size={18} />
                                 </button>
-                                <button className="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center text-white hover:bg-slate-700 transition-colors">
+                                <button className="w-10 h-10 bg-white border border-slate-200 rounded-full flex items-center justify-center text-slate-600 hover:bg-slate-50 transition-colors">
                                     <LinkIcon size={18} />
                                 </button>
                             </div>

@@ -59,10 +59,10 @@ export default function Packages() {
                         <span className="text-green-600 font-bold tracking-widest uppercase text-sm mb-4 block">
                             Tour Packages
                         </span>
-                        <h1 className="text-5xl md:text-7xl font-extrabold text-gray-900 mb-6">
+                        <h1 className="topic-title mb-6">
                             Unforgettable Journeys
                         </h1>
-                        <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                        <p className="content-text max-w-3xl mx-auto">
                             Expertly crafted itineraries combining culture, adventure, wildlife, and relaxation
                         </p>
                     </motion.div>
@@ -100,7 +100,7 @@ export default function Packages() {
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: index * 0.1 }}
-                                className="group bg-slate-900/50 backdrop-blur-xl border border-white/10 rounded-[2.5rem] overflow-hidden hover:border-white/20 transition-all duration-500"
+                                className="group bg-white border border-gray-200 rounded-[2.5rem] overflow-hidden hover:border-green-300 hover:shadow-xl transition-all duration-500"
                             >
                                 {/* Image */}
                                 <div className="relative h-64 overflow-hidden">
@@ -109,7 +109,7 @@ export default function Packages() {
                                         alt={pkg.name}
                                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                                     />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent" />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
 
                                     {/* Category Badge */}
                                     <div className="absolute top-6 left-6">
@@ -193,7 +193,7 @@ export default function Packages() {
                                             {pkg.highlights.slice(0, 4).map((highlight, idx) => (
                                                 <span
                                                     key={idx}
-                                                    className="px-3 py-1.5 bg-blue-500/10 text-blue-400 rounded-full text-xs font-semibold border border-blue-500/20"
+                                                    className="px-3 py-1.5 bg-green-100 text-green-700 rounded-full text-xs font-semibold border border-green-200"
                                                 >
                                                     {highlight}
                                                 </span>

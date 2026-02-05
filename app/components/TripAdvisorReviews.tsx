@@ -32,28 +32,28 @@ const reviews = [
 
 export default function TripAdvisorReviews() {
     return (
-        <section className="py-24 px-6 bg-slate-950/50">
+        <section className="py-24 px-6 bg-slate-50">
             <div className="max-w-7xl mx-auto">
                 <div className="flex flex-col md:flex-row items-end justify-between mb-16 gap-8">
                     <div className="max-w-xl">
-                        <h2 className="text-4xl font-bold text-white mb-4">
+                        <h2 className="sub-topic-title mb-4">
                             Loved by travelers like you
                         </h2>
-                        <p className="text-slate-400">
+                        <p className="content-text">
                             We take pride in delivering exceptional experiences. See what our customers are saying about their journeys with us.
                         </p>
                     </div>
 
-                    <div className="flex items-center gap-4 bg-slate-900 p-6 rounded-2xl shadow-sm border border-white/5">
+                    <div className="flex items-center gap-4 bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
                         <div className="flex flex-col items-center">
-                            <span className="text-3xl font-bold text-white">4.9</span>
+                            <span className="text-3xl font-bold text-slate-900">4.9</span>
                             <div className="flex text-emerald-500">
                                 {[...Array(5)].map((_, i) => <Star key={i} size={16} fill="currentColor" />)}
                             </div>
                         </div>
-                        <div className="h-10 w-px bg-slate-700" />
+                        <div className="h-10 w-px bg-slate-200" />
                         <div className="flex flex-col">
-                            <span className="font-bold text-white flex items-center gap-2">
+                            <span className="font-bold text-slate-900 flex items-center gap-2">
                                 Tripadvisor
                             </span>
                             <span className="text-sm text-slate-500">Certificate of Excellence</span>
@@ -69,9 +69,9 @@ export default function TripAdvisorReviews() {
                             whileInView={{ opacity: 1, scale: 1 }}
                             viewport={{ once: true }}
                             transition={{ delay: index * 0.1 }}
-                            className="bg-slate-900 p-8 rounded-3xl shadow-none border border-white/5 relative"
+                            className="bg-white p-8 rounded-3xl shadow-sm border border-slate-200 relative group hover:border-green-300 transition-all duration-500"
                         >
-                            <div className="absolute top-8 right-8 text-slate-700">
+                            <div className="absolute top-8 right-8 text-slate-100 group-hover:text-green-50 transition-colors">
                                 <MessageSquareQuote size={48} />
                             </div>
 
@@ -81,7 +81,7 @@ export default function TripAdvisorReviews() {
                                 ))}
                             </div>
 
-                            <p className="text-slate-300 mb-8 italic relative z-10">
+                            <p className="text-slate-600 mb-8 italic relative z-10 leading-relaxed">
                                 "{review.text}"
                             </p>
 
@@ -92,7 +92,7 @@ export default function TripAdvisorReviews() {
                                     className="w-12 h-12 rounded-full object-cover"
                                 />
                                 <div>
-                                    <h4 className="font-bold text-white">{review.name}</h4>
+                                    <h4 className="font-bold text-slate-900">{review.name}</h4>
                                     <p className="text-sm text-slate-500">{review.location}</p>
                                 </div>
                             </div>
