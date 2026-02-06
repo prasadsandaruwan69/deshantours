@@ -33,23 +33,24 @@ export default function Navbar() {
     return (
         <nav
             className={cn(
-                "fixed top-0 left-0 right-0 z-50 transition-all ml-10 rounded-full mr-10 mt-4 duration-500 px-20 md:px-30",
+                "fixed top-4 left-0 right-0 z-50 transition-all duration-500",
+                "mx-4 md:mx-10 rounded-full",
                 scrolled
-                    ? "py-6 bg-white/90 backdrop-blur-lg border-b border-slate-200 shadow-sm"
-                    : "py-6 bg-transparent"
+                    ? "py-3 md:py-6 bg-white/90 backdrop-blur-lg border border-slate-200 shadow-lg"
+                    : "py-4 md:py-6 bg-white/10 backdrop-blur-md border border-white/20"
             )}
         >
-            <div className="max-w-7xl mx-auto flex items-center justify-between">
+            <div className="max-w-7xl mx-auto px-6 md:px-10 flex items-center justify-between relative">
                 {/* Left: Navigation Links - Desktop */}
                 <div className={cn(
                     "hidden lg:flex items-center gap-8",
-                    scrolled ? "text-gray-700" : "text-gray-800"
+                    scrolled ? "text-slate-700" : "text-slate-800"
                 )}>
                     {navLinks.slice(0, 3).map((link) => (
                         <Link
                             key={link.name}
                             href={link.href}
-                            className="relative text-[11px] font-black uppercase tracking-[0.2em] transition-all group hover:text-green-600"
+                            className="relative text-[11px] font-black uppercase tracking-[0.2em] transition-all group hover:text-green-500"
                         >
                             {link.name}
                             <motion.span
@@ -62,10 +63,10 @@ export default function Navbar() {
                 </div>
 
                 {/* Center: Logo */}
-                <Link href="/" className="absolute left-1/2 -translate-x-1/2 flex items-center group">
+                <Link href="/" className="absolute left-1/2 -translate-x-1/2 flex items-center group z-20">
                     <motion.div
                         whileHover={{ scale: 1.05 }}
-                        className="relative h-14 w-auto"
+                        className="relative h-10 md:h-14 w-auto"
                     >
                         <img
                             src="/logo.png"
@@ -78,13 +79,13 @@ export default function Navbar() {
                 {/* Right: Navigation Links - Desktop */}
                 <div className={cn(
                     "hidden lg:flex items-center gap-8",
-                    scrolled ? "text-gray-700" : "text-gray-800"
+                    scrolled ? "text-slate-700" : "text-slate-800"
                 )}>
                     {navLinks.slice(3).map((link) => (
                         <Link
                             key={link.name}
                             href={link.href}
-                            className="relative text-[11px] font-black uppercase tracking-[0.2em] transition-all group hover:text-green-600"
+                            className="relative text-[11px] font-black uppercase tracking-[0.2em] transition-all group hover:text-green-500"
                         >
                             {link.name}
                             <motion.span
@@ -96,18 +97,16 @@ export default function Navbar() {
                     ))}
                 </div>
 
-                {/* Actions */}
-
                 {/* Mobile Navigation Controls */}
-                <div className="flex items-center gap-4 lg:hidden">
+                <div className="flex items-center lg:hidden ml-auto">
                     <button
                         className={cn(
-                            "p-2.5 rounded-xl shadow-xl transition-all",
-                            scrolled ? "bg-green-500 text-white" : "bg-green-500 text-white"
+                            "p-2 rounded-xl transition-all",
+                            scrolled ? "bg-green-500 text-white" : "bg-slate-100 text-slate-800 border border-slate-200"
                         )}
                         onClick={() => setIsOpen(!isOpen)}
                     >
-                        {isOpen ? <X size={26} /> : <Menu size={26} />}
+                        {isOpen ? <X size={20} /> : <Menu size={20} />}
                     </button>
                 </div>
             </div>
@@ -119,23 +118,23 @@ export default function Navbar() {
                         initial={{ opacity: 0, scale: 0.95, y: -20 }}
                         animate={{ opacity: 1, scale: 1, y: 0 }}
                         exit={{ opacity: 0, scale: 0.95, y: -20 }}
-                        className="fixed inset-x-6 top-32 bg-white/98 backdrop-blur-[40px] rounded-[3rem] border border-green-200 p-12 shadow-[0_50px_100px_rgba(34,197,94,0.2)] lg:hidden overflow-hidden"
+                        className="fixed inset-x-4 top-24 bg-white/98 backdrop-blur-[40px] rounded-[2rem] border border-green-200 p-8 shadow-[0_50px_100px_rgba(34,197,94,0.2)] lg:hidden overflow-hidden"
                     >
                         <div className="absolute -bottom-20 -right-20 p-20 opacity-5 pointer-events-none">
-                            <Globe size={400} className="text-green-500 animate-spin-slow" />
+                            <Globe size={300} className="text-green-500 animate-spin-slow" />
                         </div>
 
-                        <div className="flex flex-col gap-10 relative z-10 text-left">
+                        <div className="flex flex-col gap-6 relative z-10 text-left">
                             {navLinks.map((link, idx) => (
                                 <motion.div
                                     key={link.name}
                                     initial={{ opacity: 0, x: -30 }}
                                     animate={{ opacity: 1, x: 0 }}
-                                    transition={{ delay: idx * 0.1 }}
+                                    transition={{ delay: idx * 0.05 }}
                                 >
                                     <Link
                                         href={link.href}
-                                        className="text-5xl font-black text-gray-900 hover:text-green-500 tracking-tighter transition-all"
+                                        className="text-3xl font-black text-gray-900 hover:text-green-500 tracking-tighter transition-all block"
                                         onClick={() => setIsOpen(false)}
                                     >
                                         {link.name}
@@ -144,7 +143,7 @@ export default function Navbar() {
                             ))}
                             <Link
                                 href="/packages"
-                                className="mt-8 w-full py-7 bg-green-500 text-white text-center rounded-[2rem] font-black text-2xl shadow-3xl shadow-green-600/40"
+                                className="mt-4 w-full py-4 bg-green-500 text-white text-center rounded-2xl font-black text-xl shadow-lg shadow-green-600/40 block"
                                 onClick={() => setIsOpen(false)}
                             >
                                 Plan My Adventure

@@ -26,40 +26,43 @@ export default function Hero() {
                     <source src="/video.mp4" type="video/mp4" />
                 </video>
 
-                {/* Overlays */}
-
+                {/* Overlays for better text contrast */}
+                <div className="absolute inset-0 bg-gradient-to-tr from-white/60 via-white/20 to-transparent z-10" />
+                <div className="absolute inset-0 bg-black/5 z-0" />
             </div>
 
 
             {/* Main Content Area - Centered Vertically for Balance */}
-            <div className="relative z-10 max-w-7xl mx-auto px-6 w-full flex-1 flex flex-col justify-center">
+            <div className="relative z-20 max-w-7xl mx-auto mt-30 px-6 w-full flex-1 flex flex-col justify-center">
                 <div className="grid lg:grid-cols-2 gap-12 items-center">
-                    <div className="text-left space-y-8">
-                        <motion.div
-                            initial={{ opacity: 0, x: -20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 0.6 }}
-                            className="inline-flex items-center gap-2.5 px-5 py-2 bg-green-500/10 backdrop-blur-2xl border border-green-500/20 rounded-full text-green-600 text-[11px] font-black uppercase tracking-[0.2em]"
-                        >
-                            <Sparkles size={14} className="animate-pulse" />
-                            Discover Authentic Ceylon
-                        </motion.div>
+                    <div className="text-left">
 
-                        <motion.div
-                            initial={{ opacity: 0, y: 30 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.8, delay: 0.2 }}
-                            className="space-y-6"
-                        >
-                            <h1 className="text-6xl md:text-[7.5rem] font-black text-slate-900 leading-[0.85] tracking-tighter">
-                                Explore <br />
-                                <span className="text-gradient to-blue-600 from-blue-800">Sri Lanka</span>
-                            </h1>
-                            <p className="text-lg md:text-2xl text-slate-800 max-w-2xl font-medium leading-relaxed opacity-90">
-                                Ancient wonders, misty highlands, and golden shores. Experience the heart of the Indian Ocean with Deshan Tours.
-                            </p>
-                        </motion.div>
+                        <div className="relative overflow-hidden rounded-3xl">
+                            {/* Blue background */}
+                            <div className="absolute inset-0 bg-gradient-to-br " />
 
+                            {/* Soft overlay */}
+                            <div className="absolute inset-0 bg-black/30" />
+
+                            <motion.div
+                                initial={{ opacity: 0, y: 30 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.8, delay: 0.2 }}
+                                className="relative z-10 space-y-6 max-w-4xl p-10 
+               backdrop-blur-sm border border-white/30 shadow-2xl"
+                            >
+                                <h1 className="text-6xl md:text-[4.5rem] font-black leading-[0.85] tracking-tighter text-white drop-shadow-[0_6px_30px_rgba(0,0,0,0.9)]">
+                                    Explore <br />
+                                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 via-emerald-300 to-green-200 animate-shimmer bg-[length:200%_auto]">
+                                        Sri Lanka
+                                    </span>
+                                </h1>
+
+                                <p className="text-lg md:text-xl text-white max-w-2xl font-bold leading-relaxed drop-shadow-lg">
+                                    Ancient wonders, misty highlands, and golden shores. Experience the heart of the Indian Ocean with Deshan Tours.
+                                </p>
+                            </motion.div>
+                        </div>
 
                     </div>
 

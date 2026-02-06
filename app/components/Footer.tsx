@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 
 export default function Footer() {
     return (
-        <footer className="relative bg-white text-gray-600 pt-32 pb-16 px-6 overflow-hidden border-t border-slate-100">
+        <footer className="relative bg-white text-gray-600 rounded-3xl  pt-20 p-3 pt-32 overflow-hidden border-t border-slate-100">
             {/* Background Image Container with Float Animation */}
             <motion.div
                 animate={{ y: [-20, 20] }}
@@ -26,7 +26,7 @@ export default function Footer() {
                     className="object-cover opacity-40 scale-110"
                 />
             </motion.div>
-            <div className="absolute inset-0 bg-gradient-to-t from-white via-white/30 to-white/10 z-0" />
+            <div className="absolute inset-0 bg-gradient-to-t to-white/80 z-0" />
 
             <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-16 relative z-10">
                 {/* Brand Section */}
@@ -116,13 +116,14 @@ export default function Footer() {
                         </li>
                     </ul>
                 </div>
+
             </div>
 
-            <div className="max-w-7xl mx-auto mt-24 pt-8 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center gap-6 text-sm font-bold text-gray-500 uppercase tracking-widest">
-                <p>© 2024 Deshan Tours. Excellence in Travel.</p>
+            <div className=" relative z-10 max-w-7xl mx-auto mt-24 pt-8 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center gap-6 text-sm font-bold text-gray-800 uppercase ">
+                <p>© 2026 Deshan Tours. Excellence in Travel.</p>
                 <div className="flex gap-10">
-                    <a href="#" className="hover:text-green-600 transition-colors">Privacy Policy</a>
-                    <a href="#" className="hover:text-green-600 transition-colors">Terms of Use</a>
+                    <a href="#" className="hover:text-green-800 transition-colors">Privacy Policy</a>
+                    <a href="#" className="hover:text-green-800 transition-colors">Terms of Use</a>
                 </div>
             </div>
         </footer>
