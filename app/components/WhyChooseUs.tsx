@@ -32,7 +32,7 @@ const features = [
 
 export default function WhyChooseUs() {
     return (
-        <section className="py-24 px-6 bg-white relative overflow-hidden">
+        <section className="py-24 px-6 bg-gradient-to-b from-black via-gray-300/40 to-white relative overflow-hidden">
             {/* Background decoration */}
             <div className="absolute inset-0 opacity-5">
                 <div className="absolute top-20 left-10 w-72 h-72 bg-green-500 rounded-full blur-[120px]" />
@@ -55,7 +55,7 @@ export default function WhyChooseUs() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.1 }}
-                        className="sub-topic-title mb-6"
+                        className="sub-topic-title mb-6 !text-white"
                     >
                         Your Perfect Travel Partner
                     </motion.h2>
@@ -64,7 +64,7 @@ export default function WhyChooseUs() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.2 }}
-                        className="content-text max-w-3xl mx-auto"
+                        className="content-text max-w-3xl mx-auto !text-slate-300"
                     >
                         We combine local expertise with world-class service to create unforgettable experiences across Sri Lanka
                     </motion.p>

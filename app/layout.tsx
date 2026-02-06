@@ -19,6 +19,7 @@ export const metadata: Metadata = {
 
 import { ThemeProvider } from "./components/ThemeProvider";
 import LiveChat from "./components/LiveChat";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export default function RootLayout({
   children,
@@ -39,6 +40,7 @@ export default function RootLayout({
         >
           {children}
           <LiveChat />
+          <SpeedInsights />
         </ThemeProvider>
       </body>
     </html>

@@ -368,7 +368,7 @@ export default function PackageDetail() {
                                         </div>
                                     </div>
 
-                                    <Link href="/contact">
+                                    <Link href={`/packages/${pkg.id}/book`}>
                                         <button className="w-full py-4 bg-white text-blue-600 rounded-2xl font-black text-lg hover:bg-blue-50 transition-all shadow-xl mb-4">
                                             Book Now
                                         </button>

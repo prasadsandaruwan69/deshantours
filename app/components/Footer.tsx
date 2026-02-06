@@ -47,14 +47,20 @@ export default function Footer() {
                         Crafting the world's most authentic travel experiences with passion and local expertise since 2010.
                     </p>
                     <div className="flex gap-4">
-                        {[Instagram, Facebook, Twitter].map((Icon, i) => (
+                        {[
+                            { Icon: Instagram, href: "#" },
+                            { Icon: Facebook, href: "https://www.facebook.com/share/17Kt6vAjt3/" },
+                            { Icon: Twitter, href: "#" }
+                        ].map((social, i) => (
                             <motion.a
                                 key={i}
-                                href="#"
+                                href={social.href}
+                                target="_blank"
+                                rel="noopener noreferrer"
                                 whileHover={{ y: -5, scale: 1.1 }}
                                 className="p-3 bg-white hover:bg-green-500 rounded-xl text-gray-700 hover:text-white transition-colors shadow-sm border border-gray-200"
                             >
-                                <Icon size={20} />
+                                <social.Icon size={20} />
                             </motion.a>
                         ))}
                     </div>
@@ -106,9 +112,12 @@ export default function Footer() {
                             <MapPin className="text-green-600 shrink-0" size={20} />
                             <span className="font-bold text-gray-700">123 Travel Lane, <br />Colombo 03, SL</span>
                         </li>
-                        <li className="flex items-center gap-4">
+                        <li className="flex items-start gap-4">
                             <Phone className="text-green-600 shrink-0" size={20} />
-                            <span className="font-bold text-gray-700">+1 (234) 567 890</span>
+                            <div className="flex flex-col font-bold text-gray-700">
+                                <a href="tel:0776962467" className="hover:text-green-600 transition-colors">0776962467 (WhatsApp)</a>
+                                <a href="tel:0767584660" className="hover:text-green-600 transition-colors">0767584660</a>
+                            </div>
                         </li>
                         <li className="flex items-center gap-4">
                             <Mail className="text-green-600 shrink-0" size={20} />

@@ -72,7 +72,10 @@ export default function Contact() {
                                     </div>
                                     <div>
                                         <h4 className="font-bold text-slate-900 mb-1">Call us</h4>
-                                        <p className="text-slate-600">+1 (234) 567-890</p>
+                                        <div className="flex flex-col text-slate-600 font-medium">
+                                            <a href="tel:0776962467" className="hover:text-emerald-600 transition-colors">0776962467 (WhatsApp)</a>
+                                            <a href="tel:0767584660" className="hover:text-emerald-600 transition-colors">0767584660</a>
+                                        </div>
                                     </div>
                                 </div>
                                 <div className="flex gap-6">
