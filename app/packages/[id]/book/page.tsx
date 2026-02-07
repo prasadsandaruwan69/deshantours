@@ -99,12 +99,22 @@ export default function PackageBooking() {
 
 
 
+            const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
+            const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
+            const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
+
+            if (!serviceId || !templateId || !publicKey) {
+                console.error("EmailJS Error: Missing environment variables", { serviceId, templateId, publicKey });
+                throw new Error("Email configuration is missing. Please contact support.");
+            }
+
             await emailjs.send(
-                process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
-                process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+                serviceId,
+                templateId,
                 templateParams,
-                process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
+                publicKey
             );
+
 
             setStatus({ type: 'success', message: 'Booking inquiry sent successfully! Our team will contact you shortly.' });
             setFormData({ name: "", email: "", phone: "", startDate: "", guests: 1, message: "" });
