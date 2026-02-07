@@ -7,6 +7,8 @@ import { Mail, Phone, MapPin, Send } from "lucide-react";
 
 import { useState } from "react";
 import { supabase } from "@/lib/supabase";
+import emailjs from '@emailjs/browser';
+
 
 export default function Contact() {
     const [formData, setFormData] = useState({
@@ -24,16 +26,41 @@ export default function Contact() {
         setStatus(null);
 
         try {
-            const { error } = await supabase
+            const { data, error } = await supabase
                 .from('contact_messages')
                 .insert([
                     {
                         ...formData,
                         status: 'new'
                     }
-                ]);
+                ])
+                .select()
+                .single();
 
             if (error) throw error;
+
+            // Send Email notification using EmailJS
+            const templateParams = {
+                order_id: `MSG-${data.id}`,
+                order_location: "General Inquiry",
+                order_image: "",
+                order_person_count: "N/A",
+                order_price: "N/A",
+                customer_name: formData.name,
+                customer_email: formData.email,
+                customer_phone: "Not provided",
+                start_date: "N/A",
+                special_requests: formData.message,
+                booking_date: new Date().toLocaleDateString(),
+                subject: formData.subject
+            };
+
+            await emailjs.send(
+                process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+                process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+                templateParams,
+                process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
+            );
 
             setStatus({ type: 'success', message: 'Your message has been sent successfully!' });
             setFormData({ name: "", email: "", subject: "", message: "" });
@@ -43,6 +70,7 @@ export default function Contact() {
         } finally {
             setLoading(false);
         }
+
     };
 
     return (

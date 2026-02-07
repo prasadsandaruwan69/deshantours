@@ -2,6 +2,8 @@ import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, MapPin, Calendar, Users, ChevronRight, Sparkles, Phone, CheckCircle2, AlertCircle } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
+import emailjs from '@emailjs/browser';
+
 
 const slides = [
     {
@@ -75,7 +77,7 @@ export default function Hero() {
         setStatus(null);
 
         try {
-            const { error } = await supabase
+            const { data, error } = await supabase
                 .from('bookingscontact')
                 .insert([{
                     customer_name: "Hero Section Inquiry",
@@ -89,9 +91,35 @@ export default function Hero() {
                     total_price: 0,
                     status: 'pending',
                     special_requests: `Quick booking from hero section. Location: ${bookingData.location}, Date: ${bookingData.date}, Travelers: ${bookingData.travelers}`
-                }]);
+                }])
+                .select()
+                .single();
 
             if (error) throw error;
+
+            // Send Email notification using EmailJS
+            const templateParams = {
+                order_id: String(data.id),
+                order_image: "https://placeholder.com/image.jpg",
+                order_person_count: String(bookingData.travelers || "1"),
+                order_price: "Contact for Pricing",
+                order_location: bookingData.location || "Quick Inquiry",
+                customer_name: "Hero Section Inquiry",
+                customer_email: "hero@deshantours.com",
+                customer_phone: bookingData.phone || "N/A",
+                start_date: bookingData.date || "TBA",
+                special_requests: `Quick inquiry from website hero section. Guests: ${bookingData.travelers}, Date: ${bookingData.date}`,
+                booking_date: new Date().toLocaleDateString()
+            };
+
+
+
+            await emailjs.send(
+                process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+                process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+                templateParams,
+                process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
+            );
 
             setStatus({ type: 'success', message: 'Inquiry sent! We will call you soon.' });
             setBookingData({ location: "", date: "", travelers: "", phone: "" });
@@ -104,6 +132,7 @@ export default function Hero() {
         } finally {
             setLoading(false);
         }
+
     };
 
     React.useEffect(() => {

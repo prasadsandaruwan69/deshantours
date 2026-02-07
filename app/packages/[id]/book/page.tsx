@@ -12,6 +12,8 @@ import {
     Clock, ShieldCheck
 } from "lucide-react";
 import Link from "next/link";
+import emailjs from '@emailjs/browser';
+
 
 export default function PackageBooking() {
     const params = useParams();
@@ -60,7 +62,7 @@ export default function PackageBooking() {
         setStatus(null);
 
         try {
-            const { error } = await supabase
+            const { data, error } = await supabase
                 .from('bookingscontact')
                 .insert([{
                     customer_name: formData.name,
@@ -74,9 +76,35 @@ export default function PackageBooking() {
                     total_price: (pkg?.price || 0) * formData.guests,
                     status: 'pending',
                     special_requests: formData.message
-                }]);
+                }])
+                .select()
+                .single();
 
             if (error) throw error;
+
+            // Send Email notification using EmailJS
+            const templateParams = {
+                order_id: String(data.id),
+                order_image: pkg?.image || "https://placeholder.com/image.jpg",
+                order_person_count: String(formData.guests),
+                order_price: `$${(pkg?.price || 0) * formData.guests}`,
+                order_location: pkg?.name || "Tour Package",
+                customer_name: formData.name || "Customer",
+                customer_email: formData.email || "",
+                customer_phone: formData.phone || "N/A",
+                start_date: formData.startDate || "TBA",
+                special_requests: formData.message || "None",
+                booking_date: new Date().toLocaleDateString()
+            };
+
+
+
+            await emailjs.send(
+                process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+                process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+                templateParams,
+                process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
+            );
 
             setStatus({ type: 'success', message: 'Booking inquiry sent successfully! Our team will contact you shortly.' });
             setFormData({ name: "", email: "", phone: "", startDate: "", guests: 1, message: "" });
@@ -89,6 +117,7 @@ export default function PackageBooking() {
         } finally {
             setSubmitting(false);
         }
+
     };
 
     if (loading) {
@@ -133,8 +162,8 @@ export default function PackageBooking() {
                             >
                                 {status && (
                                     <div className={`mb-8 p-6 rounded-2xl flex items-center gap-4 ${status.type === 'success'
-                                            ? 'bg-green-500/10 text-green-600 border border-green-500/20'
-                                            : 'bg-red-500/10 text-red-600 border border-red-500/20'
+                                        ? 'bg-green-500/10 text-green-600 border border-green-500/20'
+                                        : 'bg-red-500/10 text-red-600 border border-red-500/20'
                                         }`}>
                                         {status.type === 'success' ? <CheckCircle2 size={24} /> : <Users size={24} />}
                                         <p className="font-bold">{status.message}</p>
