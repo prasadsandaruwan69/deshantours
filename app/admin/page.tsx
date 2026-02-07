@@ -40,17 +40,17 @@ export default function AdminDashboard() {
             const [destinations, packages, bookings, messages] = await Promise.all([
                 supabase.from('destinations').select('*', { count: 'exact', head: true }),
                 supabase.from('packages').select('*', { count: 'exact', head: true }),
-                supabase.from('bookings').select('*', { count: 'exact', head: true }),
+                supabase.from('bookingscontact').select('*', { count: 'exact', head: true }),
                 supabase.from('contact_messages').select('*', { count: 'exact', head: true })
             ]);
 
             const { count: pendingCount } = await supabase
-                .from('bookings')
+                .from('bookingscontact')
                 .select('*', { count: 'exact', head: true })
                 .eq('status', 'pending');
 
             const { data: revenueData } = await supabase
-                .from('bookings')
+                .from('bookingscontact')
                 .select('total_price')
                 .in('status', ['confirmed', 'completed']);
 
@@ -72,7 +72,7 @@ export default function AdminDashboard() {
     const loadRecentBookings = async () => {
         try {
             const { data, error } = await supabase
-                .from('bookings')
+                .from('bookingscontact')
                 .select('*')
                 .order('created_at', { ascending: false })
                 .limit(5);

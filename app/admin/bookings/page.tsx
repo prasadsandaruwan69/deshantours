@@ -33,7 +33,7 @@ export default function BookingsManagement() {
     const loadBookings = async () => {
         try {
             const { data, error } = await supabase
-                .from('bookings')
+                .from('bookingscontact')
                 .select('*')
                 .order('created_at', { ascending: false });
 
@@ -70,7 +70,7 @@ export default function BookingsManagement() {
     const updateBookingStatus = async (id: number, status: string) => {
         try {
             const { error } = await supabase
-                .from('bookings')
+                .from('bookingscontact')
                 .update({ status })
                 .eq('id', id);
 
@@ -90,7 +90,7 @@ export default function BookingsManagement() {
 
         try {
             const { error } = await supabase
-                .from('bookings')
+                .from('bookingscontact')
                 .delete()
                 .eq('id', id);
 
